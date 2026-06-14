@@ -1,0 +1,55 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import CTABox from '@components/CTABox.astro';
+import { counties } from '@data/counties';
+import { SITE } from '@lib/site';
+
+const title = `Pergola Installers by Location | ${SITE.name}`;
+const description =
+  'Browse trusted pergola installers across UK counties — Berkshire, Surrey, Hertfordshire, Cheshire, Kent and beyond. Get free quotes in your area.';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Locations', url: '/locations/' },
+];
+---
+
+<PageLayout title={title} description={description} breadcrumbs={breadcrumbs}>
+  <div class="container-tight py-10 md:py-14">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <div class="max-w-3xl">
+      <div class="eyebrow mb-5">Locations</div>
+      <h1 class="display text-4xl md:text-6xl lg:text-7xl">Pergola installers by location.</h1>
+      <p class="mt-6 text-lg md:text-xl leading-relaxed" style="color: var(--color-mist);">
+        Find suitable pergola installers covering your county. Free, no-obligation quotes
+        for aluminium, louvered and motorised pergolas in your area.
+      </p>
+    </div>
+
+    <section class="mt-14">
+      <div class="eyebrow mb-3">All counties</div>
+      <h2 class="display text-2xl md:text-4xl mb-8">Where we cover</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+        {counties.map((c) => (
+          <a
+            href={`/locations/${c.slug}/pergola-installers/`}
+            class="group block surface px-5 py-5 transition-all hover:bg-[color:var(--color-stone-soft)] hover:-translate-y-0.5"
+          >
+            <div class="eyebrow text-[10px] mb-1.5">Pergola installers</div>
+            <div class="font-display text-lg flex items-center justify-between" style="font-weight: 500;">
+              <span>{c.name}</span>
+              <svg class="opacity-0 group-hover:opacity-100 transition" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-clay);"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <CTABox
+      heading="Don't see your area?"
+      subheading="We're adding new locations regularly. Get in touch and we'll see if we can help match you with a suitable installer."
+    />
+  </div>
+</PageLayout>

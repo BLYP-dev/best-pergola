@@ -1,0 +1,44 @@
+---
+import { countyBySlug } from '@data/counties';
+import { townBySlug } from '@data/towns';
+
+export interface Props {
+  heading?: string;
+  type: 'counties' | 'towns';
+  slugs: string[];
+  countySlug?: string;
+}
+
+const { heading, type, slugs, countySlug } = Astro.props;
+
+const items =
+  type === 'counties'
+    ? slugs
+        .map((s) => countyBySlug(s))
+        .filter((c): c is NonNullable<typeof c> => Boolean(c))
+        .map((c) => ({ name: c.name, href: `/locations/${c.slug}/pergola-installers/` }))
+    : slugs
+        .map((s) => townBySlug(countySlug ?? '', s))
+        .filter((t): t is NonNullable<typeof t> => Boolean(t))
+        .map((t) => ({ name: t.name, href: `/locations/${t.countySlug}/${t.slug}/pergola-installers/` }));
+
+const defaultHeading = type === 'counties' ? 'Nearby counties' : 'Nearby towns';
+---
+
+{items.length > 0 && (
+  <section class="my-12">
+    <div class="eyebrow mb-3">Also nearby</div>
+    <h2 class="display text-2xl md:text-3xl mb-5">{heading ?? defaultHeading}</h2>
+    <div class="flex flex-wrap gap-2">
+      {items.map((item) => (
+        <a
+          href={item.href}
+          class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full surface text-sm font-medium transition hover:bg-[color:var(--color-stone-soft)] hover:-translate-y-0.5"
+        >
+          {item.name}
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-mist);"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </a>
+      ))}
+    </div>
+  </section>
+)}

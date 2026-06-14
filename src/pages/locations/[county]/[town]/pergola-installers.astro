@@ -1,0 +1,167 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import NearbyLocations from '@components/NearbyLocations.astro';
+import CTABox from '@components/CTABox.astro';
+import FAQ from '@components/FAQ.astro';
+import QuoteForm from '@components/QuoteForm.astro';
+import CostTable from '@components/CostTable.astro';
+import { towns } from '@data/towns';
+import { sharedFaqs } from '@data/faqs';
+import { faqLd, localAreaLd } from '@lib/jsonld';
+
+export function getStaticPaths() {
+  return towns.map((t) => ({
+    params: { county: t.countySlug, town: t.slug },
+    props: { town: t },
+  }));
+}
+
+const { town } = Astro.props;
+const pageUrl = `/locations/${town.countySlug}/${town.slug}/pergola-installers/`;
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Locations', url: '/locations/' },
+  { name: town.county, url: `/locations/${town.countySlug}/pergola-installers/` },
+  { name: town.name, url: pageUrl },
+];
+
+const jsonLd = [
+  faqLd(sharedFaqs),
+  localAreaLd({
+    name: `Pergola Installers in ${town.name}`,
+    description: town.intro,
+    url: pageUrl,
+    areaName: `${town.name}, ${town.county}`,
+  }),
+];
+
+const costRows = [
+  { label: 'Wooden, fitted', range: '£1,500 – £4,500' },
+  { label: 'Aluminium, fixed roof', range: '£4,000 – £8,000' },
+  { label: 'Louvered aluminium', range: '£6,000 – £12,000' },
+  { label: 'Motorised louvered', range: '£8,000 – £16,000' },
+];
+
+const typeCards = [
+  { slug: 'aluminium-pergolas', name: 'Aluminium pergolas', body: 'Modern, low-maintenance and weatherproof.' },
+  { slug: 'louvered-pergolas', name: 'Louvered pergolas', body: 'Adjustable roof — sun, shade or full rain cover.' },
+  { slug: 'motorised-pergolas', name: 'Motorised pergolas', body: 'Remote, app or sensor control.' },
+  { slug: 'pergola-with-sides', name: 'Pergolas with sides', body: 'Extend the usable outdoor season with side screens.' },
+];
+---
+
+<PageLayout
+  title={town.metaTitle}
+  description={town.metaDescription}
+  breadcrumbs={breadcrumbs}
+  jsonLd={jsonLd}
+>
+  <div class="container-tight py-10 md:py-14">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <div class="grid lg:grid-cols-[1.5fr_1fr] gap-10 lg:gap-16 items-start">
+      <div>
+        <div class="chip mb-5">
+          <span class="chip-dot"></span>
+          {town.name}, {town.county}
+        </div>
+        <h1 class="display text-4xl md:text-6xl lg:text-7xl">
+          Pergola installers in {town.name}.
+        </h1>
+        <p class="mt-6 text-lg leading-relaxed" style="color: var(--color-mist);">{town.intro}</p>
+        <p class="mt-3" style="color: var(--color-mist);">
+          {town.name} sits within
+          <a href={`/locations/${town.countySlug}/pergola-installers/`} class="font-medium underline" style="color: var(--color-moss); text-underline-offset: 3px;">{town.county}</a>.
+          We help match local homeowners with suitable pergola installers covering the area.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#quote" class="btn btn-primary btn-lg">
+            Get free quotes in {town.name}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </a>
+          <a href={`/locations/${town.countySlug}/pergola-installers/`} class="btn btn-secondary btn-lg">
+            {town.county} overview
+          </a>
+        </div>
+      </div>
+
+      {/* Quick facts panel */}
+      <div class="surface-stone p-7 md:p-9">
+        <div class="eyebrow mb-4">{town.name} at a glance</div>
+        <dl class="space-y-5">
+          <div>
+            <dt class="text-xs uppercase tracking-wider mb-1" style="color: var(--color-mist);">County</dt>
+            <dd class="font-display text-2xl" style="font-weight: 500;">{town.county}</dd>
+          </div>
+          <div>
+            <dt class="text-xs uppercase tracking-wider mb-1" style="color: var(--color-mist);">Typical install</dt>
+            <dd class="font-display text-2xl" style="font-weight: 500;">£5,000–£12,000</dd>
+          </div>
+          <div>
+            <dt class="text-xs uppercase tracking-wider mb-1" style="color: var(--color-mist);">On-site time</dt>
+            <dd class="font-display text-2xl" style="font-weight: 500;">1–5 days</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <CostTable heading={`Pergola cost estimates in ${town.name}`} rows={costRows} />
+
+    <section class="my-12 md:my-16">
+      <div class="eyebrow mb-3">Pergola types</div>
+      <h2 class="display text-3xl md:text-4xl mb-8">Popular in {town.name}</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {typeCards.map((t) => (
+          <a href={`/${t.slug}/`} class="group surface p-7 flex items-start justify-between gap-4 hover:bg-[color:var(--color-stone-soft)] transition-all hover:-translate-y-0.5">
+            <div>
+              <div class="font-display text-xl md:text-2xl mb-2" style="font-weight: 500;">{t.name}</div>
+              <p class="text-sm leading-relaxed" style="color: var(--color-mist);">{t.body}</p>
+            </div>
+            <svg class="flex-shrink-0 opacity-30 group-hover:opacity-100 group-hover:-translate-y-1 group-hover:translate-x-1 transition" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-clay);"><path d="M7 17 17 7M7 7h10v10"/></svg>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="my-12 surface p-7 md:p-10">
+      <div class="w-11 h-11 rounded-full flex items-center justify-center mb-5" style="background: var(--color-stone);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-moss);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3 class="font-display text-xl md:text-2xl mb-2" style="font-weight: 500;">Planning permission in {town.name}</h3>
+      <p class="leading-relaxed max-w-3xl" style="color: var(--color-mist);">
+        Most pergolas in {town.name} fall under Permitted Development if they are under 2.5m high
+        within 2m of a boundary, sit behind the rear of the house, and do not take up more than
+        half the garden. Always check with the local planning authority for listed buildings,
+        conservation areas and any oversized builds.
+      </p>
+      <a href="/planning-permission/" class="inline-flex items-center gap-1.5 mt-4 text-sm font-medium underline" style="color: var(--color-moss); text-underline-offset: 3px;">
+        Full planning guide →
+      </a>
+    </section>
+
+    {town.nearbyTowns.length > 0 && (
+      <NearbyLocations
+        type="towns"
+        slugs={town.nearbyTowns}
+        countySlug={town.countySlug}
+        heading={`Nearby towns in ${town.county}`}
+      />
+    )}
+
+    <FAQ heading={`Pergola FAQs for ${town.name}`} faqs={sharedFaqs} />
+
+    <CTABox
+      heading={`Get pergola quotes in ${town.name}`}
+      subheading="Free, no-obligation quotes from suitable installers covering your area."
+    />
+
+    <QuoteForm
+      heading={`Get Free Pergola Quotes in ${town.name}`}
+      defaultCounty={town.county}
+      defaultTown={town.name}
+    />
+  </div>
+</PageLayout>

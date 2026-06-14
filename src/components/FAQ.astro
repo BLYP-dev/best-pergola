@@ -1,0 +1,40 @@
+---
+import type { FAQ } from '@data/types';
+
+export interface Props {
+  heading?: string;
+  eyebrow?: string;
+  faqs: FAQ[];
+}
+
+const { heading = 'Common questions', eyebrow = 'FAQ', faqs } = Astro.props;
+---
+
+{faqs.length > 0 && (
+  <section class="my-16 md:my-24">
+    <div class="grid lg:grid-cols-[1fr_2fr] gap-10">
+      <div>
+        <div class="eyebrow mb-3">{eyebrow}</div>
+        <h2 class="display text-3xl md:text-5xl">{heading}</h2>
+        <p class="mt-5 text-base leading-relaxed" style="color: var(--color-mist);">
+          Quick answers to the questions UK homeowners ask most. Can't see yours? Ask in the
+          quote form and an installer will come back to you.
+        </p>
+      </div>
+
+      <div class="divide-y" style="border-color: rgba(15,30,22,0.08);">
+        {faqs.map((f) => (
+          <details class="group py-5 first:pt-0">
+            <summary class="cursor-pointer list-none flex justify-between items-start gap-6 font-display text-lg md:text-xl" style="font-weight: 500;">
+              <span>{f.q}</span>
+              <span class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition group-open:bg-[color:var(--color-moss)] group-open:text-[color:var(--color-cream)]" style="background: var(--color-stone); color: var(--color-moss);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-open:rotate-45"><path d="M12 5v14M5 12h14"/></svg>
+              </span>
+            </summary>
+            <div class="mt-4 leading-relaxed max-w-2xl" style="color: var(--color-mist);">{f.a}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

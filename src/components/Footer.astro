@@ -1,0 +1,89 @@
+---
+import { SITE } from '@lib/site';
+import { counties } from '@data/counties';
+
+const featuredCounties = counties.slice(0, 8);
+---
+
+<footer class="mt-24 pt-16 pb-10" style="background: var(--color-moss); color: var(--color-cream);">
+  <div class="container-tight">
+    {/* Top — big brand statement */}
+    <div class="grid lg:grid-cols-[1.4fr_1fr] gap-10 lg:gap-16 mb-16 pb-16 border-b" style="border-color: rgba(241,233,216,0.12);">
+      <div>
+        <div class="font-display text-3xl md:text-5xl leading-tight" style="font-variation-settings: 'opsz' 144, 'SOFT' 80; font-weight: 480; letter-spacing: -0.02em;">
+          Find the right pergola installer<br/>
+          <span style="color: var(--color-clay); font-style: italic; font-variation-settings: 'opsz' 144, 'SOFT' 100;">for your garden.</span>
+        </div>
+        <a href="/#quote" class="btn btn-clay mt-8">
+          Get free quotes
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </a>
+      </div>
+      <p class="text-base leading-relaxed self-end" style="color: rgba(241,233,216,0.7);">
+        Helping UK homeowners find trusted pergola installers. We're not the installer —
+        we help match you with suitable companies in your area. Free, fast, no obligation.
+      </p>
+    </div>
+
+    {/* Link columns */}
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 text-sm">
+      <div>
+        <div class="eyebrow mb-4" style="color: rgba(241,233,216,0.5);">Locations</div>
+        <ul class="space-y-2.5">
+          {featuredCounties.map((c) => (
+            <li>
+              <a href={`/locations/${c.slug}/pergola-installers/`} class="hover:text-[color:var(--color-clay)] transition" style="color: rgba(241,233,216,0.85);">
+                {c.name}
+              </a>
+            </li>
+          ))}
+          <li class="pt-1">
+            <a href="/locations/" class="font-medium underline" style="text-underline-offset: 4px;">All locations →</a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="eyebrow mb-4" style="color: rgba(241,233,216,0.5);">Pergola types</div>
+        <ul class="space-y-2.5">
+          <li><a href="/aluminium-pergolas/" class="hover:text-[color:var(--color-clay)] transition" style="color: rgba(241,233,216,0.85);">Aluminium</a></li>
+          <li><a href="/louvered-pergolas/" class="hover:text-[color:var(--color-clay)] transition" style="color: rgba(241,233,216,0.85);">Louvered</a></li>
+          <li><a href="/motorised-pergolas/" class="hover:text-[color:var(--color-clay)] transition" style="color: rgba(241,233,216,0.85);">Motorised</a></li>
+          <li><a href="/garden-pergolas/" class="hover:text-[color:var(--color-clay)] transition" style="color: rgba(241,233,216,0.85);">Garden</a></li>
+          <li><a href="/pergola-with-sides/" class="hover:text-[color:var(--color-clay)] transition" style="color: rgba(241,233,216,0.85);">With sides</a></li>
+          <li><a href="/pergola-roofs/" class="hover:text-[color:var(--color-clay)] transition" style="color: rgba(241,233,216,0.85);">Roofs</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="eyebrow mb-4" style="color: rgba(241,233,216,0.5);">Cost</div>
+        <ul class="space-y-2.5">
+          <li><a href="/pergola-cost/" class="hover:text-[color:var(--color-clay)] transition" style="color: rgba(241,233,216,0.85);">Pergola cost UK</a></li>
+          <li><a href="/aluminium-pergola-cost/" class="hover:text-[color:var(--color-clay)] transition" style="color: rgba(241,233,216,0.85);">Aluminium cost</a></li>
+          <li><a href="/motorised-pergola-cost/" class="hover:text-[color:var(--color-clay)] transition" style="color: rgba(241,233,216,0.85);">Motorised cost</a></li>
+          <li><a href="/pergola-prices-uk/" class="hover:text-[color:var(--color-clay)] transition" style="color: rgba(241,233,216,0.85);">Prices UK</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="eyebrow mb-4" style="color: rgba(241,233,216,0.5);">Guides</div>
+        <ul class="space-y-2.5">
+          <li><a href="/planning-permission/" class="hover:text-[color:var(--color-clay)] transition" style="color: rgba(241,233,216,0.85);">Planning permission</a></li>
+          <li><a href="/pergola-height-rules/" class="hover:text-[color:var(--color-clay)] transition" style="color: rgba(241,233,216,0.85);">Height rules</a></li>
+          <li><a href="/wood-vs-aluminium-pergola/" class="hover:text-[color:var(--color-clay)] transition" style="color: rgba(241,233,216,0.85);">Wood vs aluminium</a></li>
+          <li><a href="/louvered-vs-fixed-roof-pergola/" class="hover:text-[color:var(--color-clay)] transition" style="color: rgba(241,233,216,0.85);">Louvered vs fixed</a></li>
+          <li><a href="/how-long-does-pergola-installation-take/" class="hover:text-[color:var(--color-clay)] transition" style="color: rgba(241,233,216,0.85);">Install timeline</a></li>
+        </ul>
+      </div>
+    </div>
+
+    {/* Bottom bar */}
+    <div class="mt-16 pt-8 border-t flex flex-col md:flex-row justify-between items-start md:items-center gap-3 text-xs" style="border-color: rgba(241,233,216,0.12); color: rgba(241,233,216,0.5);">
+      <span class="font-display text-base" style="font-weight: 500;">
+        Best<span style="color: var(--color-clay); font-style: italic; font-weight: 400;">Pergola</span>
+        <span style="color: rgba(241,233,216,0.4);">.co.uk</span>
+      </span>
+      <span>&copy; {new Date().getFullYear()} {SITE.name}. We help homeowners find suitable pergola installers in their area.</span>
+    </div>
+  </div>
+</footer>

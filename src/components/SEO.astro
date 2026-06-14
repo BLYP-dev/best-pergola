@@ -1,0 +1,72 @@
+---
+import { SITE, ogImage } from '@lib/site';
+
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogType?: 'website' | 'article';
+  ogImagePath?: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  breadcrumbs?: { name: string; url: string }[];
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogType = 'website',
+  ogImagePath = ogImage,
+  noindex = false,
+  jsonLd,
+  breadcrumbs,
+} = Astro.props;
+
+const canonicalUrl = canonical
+  ? new URL(canonical, SITE.url).toString()
+  : new URL(Astro.url.pathname, SITE.url).toString();
+
+const ogImageUrl = new URL(ogImagePath, SITE.url).toString();
+
+const breadcrumbLd = breadcrumbs && breadcrumbs.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbs.map((b, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: b.name,
+        item: new URL(b.url, SITE.url).toString(),
+      })),
+    }
+  : null;
+
+const jsonLdArr = [
+  jsonLd && (Array.isArray(jsonLd) ? jsonLd : [jsonLd]),
+  breadcrumbLd ? [breadcrumbLd] : null,
+]
+  .filter(Boolean)
+  .flat() as Record<string, unknown>[];
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+{noindex && <meta name="robots" content="noindex,nofollow" />}
+
+<meta property="og:type" content={ogType} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:image" content={ogImageUrl} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageUrl} />
+
+{jsonLdArr.map((data) => (
+  <script type="application/ld+json" set:html={JSON.stringify(data)} />
+))}

@@ -1,0 +1,6 @@
+name = "bestpergola-uk"
+compatibility_date = "2025-01-01"
+pages_build_output_dir = "./dist"
+
+# Local-only env vars go in .dev.vars (gitignored)
+# Production env vars are set in the Cloudflare Pages dashboard.

@@ -1,0 +1,214 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import LocationGrid from '@components/LocationGrid.astro';
+import ServiceCards from '@components/ServiceCards.astro';
+import CTABox from '@components/CTABox.astro';
+import FAQ from '@components/FAQ.astro';
+import QuoteForm from '@components/QuoteForm.astro';
+import CostTable from '@components/CostTable.astro';
+import { services } from '@data/services';
+import { costPages } from '@data/costs';
+import { guidePages } from '@data/guides';
+import { faqLd, serviceLd } from '@lib/jsonld';
+
+type ContentKind = 'service' | 'cost' | 'guide';
+
+export function getStaticPaths() {
+  const out: { params: { slug: string }; props: { kind: ContentKind; slug: string } }[] = [];
+  for (const s of services) out.push({ params: { slug: s.slug }, props: { kind: 'service', slug: s.slug } });
+  for (const c of costPages) out.push({ params: { slug: c.slug }, props: { kind: 'cost', slug: c.slug } });
+  for (const g of guidePages) out.push({ params: { slug: g.slug }, props: { kind: 'guide', slug: g.slug } });
+  return out;
+}
+
+const { kind, slug } = Astro.props;
+
+const service = kind === 'service' ? services.find((s) => s.slug === slug)! : null;
+const costPage = kind === 'cost' ? costPages.find((c) => c.slug === slug)! : null;
+const guide = kind === 'guide' ? guidePages.find((g) => g.slug === slug)! : null;
+
+const title = service?.metaTitle ?? costPage?.metaTitle ?? guide?.metaTitle ?? '';
+const description = service?.metaDescription ?? costPage?.metaDescription ?? guide?.metaDescription ?? '';
+const heading = service?.name ?? costPage?.name ?? guide?.name ?? '';
+const pageUrl = `/${slug}/`;
+
+const eyebrow = kind === 'service' ? 'Service' : kind === 'cost' ? 'Cost guide' : 'Guide';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: heading, url: pageUrl },
+];
+
+const faqs = service?.faqs ?? costPage?.faqs ?? guide?.faqs ?? [];
+
+const jsonLd: Record<string, unknown>[] = [];
+if (faqs.length > 0) jsonLd.push(faqLd(faqs));
+if (service) {
+  jsonLd.push(serviceLd({ name: service.name, description: service.description, url: pageUrl }));
+}
+---
+
+<PageLayout
+  title={title}
+  description={description}
+  breadcrumbs={breadcrumbs}
+  jsonLd={jsonLd}
+>
+  <div class="container-tight py-10 md:py-14">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <div class="max-w-3xl">
+      <div class="eyebrow mb-5">{eyebrow}</div>
+      <h1 class="display text-4xl md:text-6xl lg:text-7xl">{heading}.</h1>
+    </div>
+
+    {service && (
+      <>
+        <p class="mt-7 text-lg md:text-xl leading-relaxed max-w-3xl" style="color: var(--color-mist);">
+          {service.description}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#quote" class="btn btn-primary btn-lg">
+            Get free pergola quotes
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </a>
+          <a href="/locations/" class="btn btn-secondary btn-lg">Find installers near you</a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-12">
+          <div class="surface p-7">
+            <div class="eyebrow mb-2">Best for</div>
+            <p class="leading-relaxed">{service.bestFor}</p>
+          </div>
+          <div class="surface-stone p-7">
+            <div class="eyebrow mb-2">Cost range</div>
+            <div class="font-display text-2xl md:text-3xl" style="font-weight: 500;">{service.costRange}</div>
+          </div>
+          <div class="surface p-7">
+            <div class="eyebrow mb-2">Install time</div>
+            <p class="leading-relaxed">{service.installTime}</p>
+          </div>
+        </div>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-4 my-12">
+          <div class="surface p-7 md:p-9">
+            <div class="w-11 h-11 rounded-full flex items-center justify-center mb-5" style="background: var(--color-stone);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-moss);"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <h2 class="font-display text-xl md:text-2xl mb-4" style="font-weight: 500;">Pros</h2>
+            <ul class="space-y-3">
+              {service.pros.map((p) => (
+                <li class="flex gap-3">
+                  <span class="flex-shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full" style="background: var(--color-moss);"></span>
+                  <span style="color: var(--color-mist);">{p}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="surface p-7 md:p-9">
+            <div class="w-11 h-11 rounded-full flex items-center justify-center mb-5" style="background: var(--color-stone);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-clay);"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
+            </div>
+            <h2 class="font-display text-xl md:text-2xl mb-4" style="font-weight: 500;">Cons</h2>
+            <ul class="space-y-3">
+              {service.cons.map((c) => (
+                <li class="flex gap-3">
+                  <span class="flex-shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full" style="background: var(--color-clay);"></span>
+                  <span style="color: var(--color-mist);">{c}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <LocationGrid heading="Find pergola installers near you" limit={20} />
+      </>
+    )}
+
+    {costPage && (
+      <>
+        <p class="mt-7 text-lg md:text-xl leading-relaxed max-w-3xl" style="color: var(--color-mist);">
+          {costPage.intro}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#quote" class="btn btn-primary btn-lg">
+            Get free pergola quotes
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </a>
+          <a href="/locations/" class="btn btn-secondary btn-lg">Find installers near you</a>
+        </div>
+
+        <CostTable rows={costPage.priceRanges} />
+
+        <section class="my-12 md:my-16">
+          <div class="eyebrow mb-3">Variables</div>
+          <h2 class="display text-3xl md:text-4xl mb-8">What affects pergola price</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {costPage.factors.map((f) => (
+              <div class="surface px-5 py-4 flex items-start gap-3">
+                <span class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-0.5" style="background: var(--color-stone);">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-moss);"><path d="M20 6 9 17l-5-5"/></svg>
+                </span>
+                <span>{f}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section class="my-12">
+          <div class="eyebrow mb-3">Add-ons</div>
+          <h2 class="display text-3xl md:text-4xl mb-8">Optional extras</h2>
+          <div class="surface overflow-hidden">
+            <div class="divide-y" style="border-color: rgba(15,30,22,0.06);">
+              {costPage.extras.map((e, i) => (
+                <div class={`flex justify-between items-center px-5 md:px-8 py-5 ${i % 2 === 1 ? 'bg-[color:var(--color-stone-soft)]/60' : ''}`}>
+                  <span>{e.name}</span>
+                  <span class="font-display whitespace-nowrap text-base md:text-lg" style="font-weight: 500;">{e.cost}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <ServiceCards heading="See all pergola types" limit={6} />
+      </>
+    )}
+
+    {guide && (
+      <>
+        <p class="mt-7 text-lg md:text-xl leading-relaxed max-w-3xl" style="color: var(--color-mist);">
+          {guide.intro}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#quote" class="btn btn-primary btn-lg">
+            Get free pergola quotes
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </a>
+          <a href="/locations/" class="btn btn-secondary btn-lg">Find installers near you</a>
+        </div>
+
+        <div class="prose-content my-12 md:my-16 max-w-3xl">
+          {guide.sections.map((s) => (
+            <>
+              <h2>{s.heading}</h2>
+              <p>{s.body}</p>
+            </>
+          ))}
+        </div>
+      </>
+    )}
+
+    <FAQ faqs={faqs} />
+
+    <CTABox
+      heading="Ready to get free pergola quotes?"
+      subheading="Tell us about your project and we'll help match you with suitable installers in your area."
+    />
+
+    <QuoteForm />
+  </div>
+</PageLayout>

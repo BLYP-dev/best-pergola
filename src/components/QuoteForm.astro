@@ -1,0 +1,218 @@
+---
+export interface Props {
+  id?: string;
+  heading?: string;
+  subheading?: string;
+  defaultCounty?: string;
+  defaultTown?: string;
+}
+
+const {
+  id = 'quote',
+  heading = 'Get Free Pergola Quotes',
+  subheading = 'Tell us about your project and we will help match you with suitable pergola installers in your area.',
+  defaultCounty = '',
+  defaultTown = '',
+} = Astro.props;
+
+const pergolaTypes = [
+  'Aluminium pergola',
+  'Wooden pergola',
+  'Louvered pergola',
+  'Motorised pergola',
+  'Pergola with side screens',
+  'Not sure yet',
+];
+
+const budgets = [
+  'Under £3,000',
+  '£3,000–£5,000',
+  '£5,000–£10,000',
+  '£10,000–£20,000',
+  '£20,000+',
+  'Not sure yet',
+];
+
+const timeframes = [
+  'As soon as possible',
+  '1–3 months',
+  '3–6 months',
+  '6+ months',
+  'Researching only',
+];
+---
+
+<section id={id} class="my-16 md:my-24 scroll-mt-24">
+  <div class="grid lg:grid-cols-[1fr_1.6fr] gap-8 lg:gap-12 items-start">
+
+    {/* Left column — pitch */}
+    <div class="lg:sticky lg:top-28">
+      <div class="eyebrow mb-4">Step 01 · Tell us about your project</div>
+      <h2 class="display text-3xl md:text-5xl">{heading}</h2>
+      <p class="mt-5 text-base md:text-lg leading-relaxed" style="color: var(--color-mist);">
+        {subheading}
+      </p>
+
+      <ul class="mt-8 space-y-4">
+        <li class="flex gap-3">
+          <span class="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center mt-0.5" style="background: var(--color-stone); color: var(--color-moss);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <div>
+            <div class="font-medium">Takes under 2 minutes</div>
+            <div class="text-sm" style="color: var(--color-mist);">Share location, budget and project type.</div>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center mt-0.5" style="background: var(--color-stone); color: var(--color-moss);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <div>
+            <div class="font-medium">Matched with local installers</div>
+            <div class="text-sm" style="color: var(--color-mist);">We pass you to a suitable installer covering your area.</div>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center mt-0.5" style="background: var(--color-stone); color: var(--color-moss);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <div>
+            <div class="font-medium">No obligation, ever</div>
+            <div class="text-sm" style="color: var(--color-mist);">Free for homeowners. Decide if any quote is right for you.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    {/* Right column — form */}
+    <div class="surface p-6 md:p-10 noise">
+      <form
+        id="quote-form"
+        class="grid grid-cols-1 md:grid-cols-2 gap-4"
+        action="/api/lead"
+        method="POST"
+        novalidate
+      >
+        <div class="md:col-span-2">
+          <label class="label" for="name">Your name</label>
+          <input class="input" id="name" name="name" type="text" required autocomplete="name" placeholder="Sarah Thompson" />
+        </div>
+
+        <div>
+          <label class="label" for="email">Email</label>
+          <input class="input" id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
+        </div>
+
+        <div>
+          <label class="label" for="phone">Phone</label>
+          <input class="input" id="phone" name="phone" type="tel" autocomplete="tel" placeholder="07…" />
+        </div>
+
+        <div>
+          <label class="label" for="postcode">Postcode</label>
+          <input class="input uppercase" id="postcode" name="postcode" type="text" required autocomplete="postal-code" placeholder="RG1 1AB" />
+        </div>
+
+        <div>
+          <label class="label" for="town">Town</label>
+          <input class="input" id="town" name="town" type="text" value={defaultTown} placeholder="Reading" />
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="label" for="county">County</label>
+          <input class="input" id="county" name="county" type="text" value={defaultCounty} placeholder="Berkshire" />
+        </div>
+
+        <div>
+          <label class="label" for="pergolaType">Pergola type</label>
+          <select class="input" id="pergolaType" name="pergolaType">
+            <option value="">— Select —</option>
+            {pergolaTypes.map((t) => <option value={t}>{t}</option>)}
+          </select>
+        </div>
+
+        <div>
+          <label class="label" for="budget">Budget</label>
+          <select class="input" id="budget" name="budget">
+            <option value="">— Select —</option>
+            {budgets.map((b) => <option value={b}>{b}</option>)}
+          </select>
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="label" for="timeframe">Preferred timeframe</label>
+          <select class="input" id="timeframe" name="timeframe">
+            <option value="">— Select —</option>
+            {timeframes.map((t) => <option value={t}>{t}</option>)}
+          </select>
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="label" for="notes">Notes (optional)</label>
+          <textarea
+            class="input" id="notes" name="notes" rows="4"
+            placeholder="Size, location in garden, attached or freestanding, any extras…"
+          ></textarea>
+        </div>
+
+        {/* Honeypot */}
+        <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+        <div class="md:col-span-2 mt-2">
+          <p class="text-xs leading-relaxed mb-5" style="color: var(--color-mist);">
+            By submitting this form, you agree that BestPergola.co.uk may contact you about your enquiry and
+            may share your details with a suitable pergola installer in your area.
+          </p>
+          <button type="submit" class="btn btn-primary btn-lg w-full md:w-auto">
+            Get my free quotes
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </button>
+          <p id="quote-error" class="hidden mt-3 text-sm font-medium" style="color: var(--color-clay-deep);"></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('quote-form') as HTMLFormElement | null;
+  const errorEl = document.getElementById('quote-error');
+
+  if (form && errorEl) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorEl.classList.add('hidden');
+      errorEl.textContent = '';
+
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+      const originalLabel = btn?.innerHTML;
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+      }
+
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        if (!res.ok) throw new Error(`Server responded ${res.status}`);
+        window.location.assign('/thank-you/');
+      } catch (err) {
+        if (errorEl) {
+          errorEl.textContent =
+            'Sorry, we could not submit your enquiry. Please try again or email hello@bestpergola.co.uk.';
+          errorEl.classList.remove('hidden');
+        }
+        if (btn && originalLabel) {
+          btn.disabled = false;
+          btn.innerHTML = originalLabel;
+        }
+      }
+    });
+  }
+</script>

@@ -1,0 +1,47 @@
+---
+const items = [
+  {
+    icon: 'gift',
+    title: 'Free, no obligation',
+    body: 'Requesting quotes is free for homeowners. You decide whether to proceed with any installer who contacts you.',
+  },
+  {
+    icon: 'pin',
+    title: 'Local installers',
+    body: 'We match you with pergola installers who actually cover your area — not generic national lead farms.',
+  },
+  {
+    icon: 'shield',
+    title: 'Honest comparison',
+    body: 'We are not the installer. Our role is to help you compare suitable companies and make a confident choice.',
+  },
+];
+---
+
+<section class="my-12 md:my-16">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    {items.map((i) => (
+      <div class="surface p-7">
+        <div class="w-11 h-11 rounded-full flex items-center justify-center mb-5" style="background: var(--color-stone);">
+          {i.icon === 'gift' && (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-moss);">
+              <path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+            </svg>
+          )}
+          {i.icon === 'pin' && (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-moss);">
+              <path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+          )}
+          {i.icon === 'shield' && (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-moss);">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>
+            </svg>
+          )}
+        </div>
+        <div class="font-display text-lg md:text-xl mb-2" style="font-weight: 500;">{i.title}</div>
+        <p class="text-sm leading-relaxed" style="color: var(--color-mist);">{i.body}</p>
+      </div>
+    ))}
+  </div>
+</section>

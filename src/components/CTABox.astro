@@ -1,0 +1,53 @@
+---
+export interface Props {
+  heading: string;
+  subheading?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  variant?: 'moss' | 'stone';
+}
+
+const {
+  heading,
+  subheading,
+  ctaLabel = 'Get Free Pergola Quotes',
+  ctaHref = '/#quote',
+  variant = 'moss',
+} = Astro.props;
+
+const isMoss = variant === 'moss';
+---
+
+<section class="my-16 md:my-24">
+  <div
+    class={`relative overflow-hidden ${isMoss ? 'surface-moss' : 'surface-stone'} px-7 py-12 md:px-14 md:py-16`}
+  >
+    {/* Decorative arc */}
+    <svg class="absolute -right-10 -top-10 w-64 h-64 opacity-15 pointer-events-none" viewBox="0 0 200 200" fill="none">
+      <circle cx="100" cy="100" r="90" stroke={isMoss ? '#f1e9d8' : '#1c3528'} stroke-width="1"/>
+      <circle cx="100" cy="100" r="65" stroke={isMoss ? '#f1e9d8' : '#1c3528'} stroke-width="1"/>
+      <circle cx="100" cy="100" r="40" stroke={isMoss ? '#f1e9d8' : '#1c3528'} stroke-width="1"/>
+    </svg>
+
+    <div class="relative max-w-3xl">
+      <div class="eyebrow mb-4" style={`color: ${isMoss ? 'rgba(241,233,216,0.7)' : 'var(--color-mist)'};`}>
+        Free · No obligation
+      </div>
+      <h2 class="display text-3xl md:text-5xl" style={`color: ${isMoss ? 'var(--color-cream)' : 'var(--color-ink)'};`}>
+        {heading}
+      </h2>
+      {subheading && (
+        <p class="mt-5 text-base md:text-lg leading-relaxed max-w-2xl" style={`color: ${isMoss ? 'rgba(241,233,216,0.85)' : 'var(--color-mist)'};`}>
+          {subheading}
+        </p>
+      )}
+      <a
+        href={ctaHref}
+        class={`btn btn-lg mt-8 ${isMoss ? 'btn-cream' : 'btn-primary'}`}
+      >
+        {ctaLabel}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+      </a>
+    </div>
+  </div>
+</section>

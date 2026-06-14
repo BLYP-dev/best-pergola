@@ -1,0 +1,40 @@
+---
+export interface PriceRow {
+  label: string;
+  range: string;
+  notes?: string;
+}
+
+export interface Props {
+  heading?: string;
+  eyebrow?: string;
+  rows: PriceRow[];
+}
+
+const { heading = 'Typical UK price ranges', eyebrow = 'Cost guide', rows } = Astro.props;
+---
+
+<section class="my-12 md:my-16">
+  <div class="mb-8">
+    <div class="eyebrow mb-3">{eyebrow}</div>
+    <h2 class="display text-3xl md:text-4xl">{heading}</h2>
+  </div>
+
+  <div class="surface overflow-hidden">
+    <div class="grid grid-cols-1 divide-y" style="border-color: rgba(15,30,22,0.06);">
+      {rows.map((r, i) => (
+        <div class={`grid grid-cols-[1fr_auto] md:grid-cols-[2fr_auto_2fr] gap-4 md:gap-8 items-center px-5 md:px-8 py-5 md:py-6 ${i % 2 === 1 ? 'bg-[color:var(--color-stone-soft)]/60' : ''}`}>
+          <div class="font-medium" style="color: var(--color-ink);">{r.label}</div>
+          <div class="font-display text-lg md:text-2xl whitespace-nowrap" style="font-weight: 500;">
+            {r.range}
+          </div>
+          <div class="hidden md:block text-sm" style="color: var(--color-mist);">{r.notes ?? ''}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <p class="text-xs mt-3" style="color: var(--color-mist);">
+    Prices vary by region, installer and project complexity. Get free quotes for an accurate figure.
+  </p>
+</section>

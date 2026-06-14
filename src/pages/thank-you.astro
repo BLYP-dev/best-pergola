@@ -1,0 +1,49 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import { SITE } from '@lib/site';
+
+const title = `Thanks — your enquiry was received | ${SITE.name}`;
+const description = 'Thanks for your pergola enquiry. We will help connect you with a suitable installer in your area.';
+---
+
+<PageLayout title={title} description={description} noindex={true}>
+  <div class="container-tight py-16 md:py-24 max-w-3xl text-center">
+    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full mb-8 fade-up" style="background: var(--color-stone);">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-moss);">
+        <polyline points="20 6 9 17 4 12" />
+      </svg>
+    </div>
+
+    <div class="eyebrow mb-4 fade-up delay-100">Enquiry received</div>
+    <h1 class="display text-4xl md:text-6xl fade-up delay-200">
+      Thanks — we'll be in touch.
+    </h1>
+    <p class="mt-6 text-lg md:text-xl leading-relaxed fade-up delay-300" style="color: var(--color-mist);">
+      We've received your pergola enquiry and will help connect you with a suitable installer
+      in your area. You should hear from us within one working day.
+    </p>
+
+    <div class="mt-12 surface p-7 md:p-10 text-left fade-up delay-400">
+      <div class="eyebrow mb-4">What happens next</div>
+      <ol class="space-y-5">
+        <li class="flex gap-4">
+          <span class="flex-shrink-0 font-display text-3xl" style="color: var(--color-clay); font-style: italic; line-height: 1;">01</span>
+          <span class="leading-relaxed pt-1" style="color: var(--color-mist);">We review the details of your project against our installer network.</span>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex-shrink-0 font-display text-3xl" style="color: var(--color-clay); font-style: italic; line-height: 1;">02</span>
+          <span class="leading-relaxed pt-1" style="color: var(--color-mist);">We pass your enquiry to a suitable pergola installer who covers your area.</span>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex-shrink-0 font-display text-3xl" style="color: var(--color-clay); font-style: italic; line-height: 1;">03</span>
+          <span class="leading-relaxed pt-1" style="color: var(--color-mist);">They contact you to arrange a survey or quote — no obligation either way.</span>
+        </li>
+      </ol>
+    </div>
+
+    <div class="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="/" class="btn btn-secondary">Back to home</a>
+      <a href="/pergola-cost/" class="btn btn-secondary">Read the cost guide</a>
+    </div>
+  </div>
+</PageLayout>
