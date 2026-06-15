@@ -2,5 +2,16 @@ name = "bestpergola-uk"
 compatibility_date = "2025-01-01"
 pages_build_output_dir = "./dist"
 
-# Local-only env vars go in .dev.vars (gitignored)
-# Production env vars are set in the Cloudflare Pages dashboard.
+# ─── KV: lead storage ──────────────────────────────────────────
+# Bound at runtime as `env.LEADS` inside /api/lead.
+[[kv_namespaces]]
+binding = "LEADS"
+id = "0048de66b5784e9f8eab310f5e1fc3a3"
+
+# ─── Vars ──────────────────────────────────────────────────────
+# Non-secret variables. For secrets (RESEND_API_KEY etc), use:
+#   wrangler pages secret put RESEND_API_KEY --project-name bestpergola-uk
+[vars]
+LEAD_NOTIFY_EMAIL = ""
+
+# Local-only env vars go in .dev.vars (gitignored).
