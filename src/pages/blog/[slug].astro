@@ -1,0 +1,103 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import PageLayout from '@layouts/PageLayout.astro';
+import CTABox from '@components/CTABox.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import { SITE } from '@lib/site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({ params: { slug: post.slug } }));
+}
+
+const { slug } = Astro.params;
+const post = await getEntry('blog', slug);
+if (!post) return Astro.redirect('/blog/');
+
+const { Content } = await post.render();
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+const title = `${post.data.title} | ${SITE.name}`;
+const description = post.data.description;
+const canonical = `${SITE.url}/blog/${slug}/`;
+
+const breadcrumbs = [
+  { name: 'Home', url: SITE.url + '/' },
+  { name: 'Blog', url: SITE.url + '/blog/' },
+  { name: post.data.title, url: canonical },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+  author: { '@type': 'Organization', name: post.data.author },
+  publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+  url: canonical,
+};
+---
+
+<PageLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  ogType="article"
+  noindex={post.data.noindex}
+  jsonLd={jsonLd}
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container-tight">
+    <div class="pt-10 md:pt-14">
+      <Breadcrumbs items={breadcrumbs} />
+    </div>
+
+    <article class="max-w-2xl mx-auto py-12 md:py-16">
+      <header class="mb-10">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="chip">{post.data.category}</span>
+          <span class="text-xs" style="color: var(--color-mist-soft);">
+            <time datetime={post.data.pubDate.toISOString()}>
+              {formatDate(post.data.pubDate)}
+            </time>
+            {post.data.updatedDate && (
+              <> · Updated <time datetime={post.data.updatedDate.toISOString()}>{formatDate(post.data.updatedDate)}</time></>
+            )}
+          </span>
+        </div>
+
+        <h1 class="display text-3xl md:text-5xl leading-tight mb-5">
+          {post.data.title}
+        </h1>
+
+        <p class="text-lg leading-relaxed" style="color: var(--color-mist);">
+          {post.data.description}
+        </p>
+
+        <div class="divider mt-8" />
+      </header>
+
+      <div class="prose-content">
+        <Content />
+      </div>
+
+      <div class="divider mt-12 mb-10" />
+
+      <p class="text-sm" style="color: var(--color-mist);">
+        Written by {post.data.author} · <a href="/blog/" style="color: var(--color-moss);">More guides</a>
+      </p>
+    </article>
+
+    <div class="max-w-2xl mx-auto pb-20">
+      <CTABox
+        heading="Get free pergola quotes near you"
+        subheading="No obligation. We match you with suitable installers covering your area."
+      />
+    </div>
+  </div>
+</PageLayout>

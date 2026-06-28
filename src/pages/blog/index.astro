@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '@layouts/PageLayout.astro';
+import CTABox from '@components/CTABox.astro';
+import { SITE } from '@lib/site';
+
+const posts = (await getCollection('blog'))
+  .filter(p => !p.data.noindex)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const title = `Pergola Advice & Guides | ${SITE.name}`;
+const description = 'Expert guides on pergola costs, planning permission, materials and installation across the UK.';
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+---
+
+<PageLayout title={title} description={description}>
+  <div class="container-tight">
+    <section class="pt-16 md:pt-24 pb-10 md:pb-16">
+      <div class="eyebrow mb-4">Blog</div>
+      <h1 class="display text-4xl md:text-6xl max-w-2xl">
+        Pergola guides &amp; advice.
+      </h1>
+      <p class="mt-5 text-base md:text-lg leading-relaxed max-w-xl" style="color: var(--color-mist);">
+        Practical articles to help you plan, budget, and get the most from your pergola project.
+      </p>
+    </section>
+
+    <div class="divider mb-16" />
+
+    {posts.length === 0 ? (
+      <p class="text-center py-16" style="color: var(--color-mist);">No posts yet — check back soon.</p>
+    ) : (
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
+        {posts.map((post) => (
+          <a
+            href={`/blog/${post.slug}/`}
+            class="surface group flex flex-col overflow-hidden transition hover:-translate-y-1 hover:shadow-lg"
+            style="text-decoration: none;"
+          >
+            <div class="p-7 flex flex-col flex-1">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="chip">{post.data.category}</span>
+              </div>
+              <h2 class="font-display text-xl leading-snug mb-3 group-hover:text-[color:var(--color-clay)] transition-colors" style="font-size:1.2rem; font-weight:500; letter-spacing:-0.018em;">
+                {post.data.title}
+              </h2>
+              <p class="text-sm leading-relaxed flex-1 mb-5" style="color: var(--color-mist);">
+                {post.data.description}
+              </p>
+              <div class="flex items-center justify-between mt-auto pt-4" style="border-top: 1px solid rgba(15,30,22,0.06);">
+                <time class="text-xs" style="color: var(--color-mist-soft);" datetime={post.data.pubDate.toISOString()}>
+                  {formatDate(post.data.pubDate)}
+                </time>
+                <span class="text-xs font-medium" style="color: var(--color-clay);">
+                  Read →
+                </span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
+
+    <CTABox
+      heading="Ready to get pergola quotes?"
+      subheading="Free, no-obligation quotes from installers covering your area."
+    />
+  </div>
+</PageLayout>
