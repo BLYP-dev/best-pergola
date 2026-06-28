@@ -19,12 +19,89 @@
         <a href="/blog/" class="px-3 py-2 rounded-full hover:bg-[color:var(--color-stone)] transition">Blog</a>
       </nav>
 
-      <a href="/#quote" class="btn btn-primary text-sm">
-        Get Quotes
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5 12h14M13 6l6 6-6 6" />
-        </svg>
-      </a>
+      <div class="flex items-center gap-3">
+        <a href="/#quote" class="btn btn-primary text-sm">
+          Get Quotes
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </a>
+
+        <button
+          id="menu-toggle"
+          class="md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-full hover:bg-[color:var(--color-stone)] transition"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <span class="menu-bar block w-5 h-px bg-current transition-all duration-300" style="margin-bottom: 5px;"></span>
+          <span class="menu-bar block w-5 h-px bg-current transition-all duration-300"></span>
+          <span class="menu-bar block w-5 h-px bg-current transition-all duration-300" style="margin-top: 5px;"></span>
+        </button>
+      </div>
     </div>
   </div>
 </header>
+
+<div
+  id="mobile-menu"
+  class="fixed inset-0 z-30 md:hidden"
+  style="display: none;"
+  aria-hidden="true"
+>
+  <div id="menu-backdrop" class="absolute inset-0 bg-[color:var(--color-ink)]/30 backdrop-blur-sm"></div>
+  <nav
+    class="absolute top-0 right-0 h-full w-72 flex flex-col pt-20 pb-8 px-6"
+    style="background: var(--color-cream);"
+  >
+    <a href="/locations/" class="py-4 text-base font-medium border-b" style="border-color: rgba(15,30,22,0.07);">Locations</a>
+    <a href="/pergola-cost/" class="py-4 text-base font-medium border-b" style="border-color: rgba(15,30,22,0.07);">Costs</a>
+    <a href="/aluminium-pergolas/" class="py-4 text-base font-medium border-b" style="border-color: rgba(15,30,22,0.07);">Aluminium</a>
+    <a href="/louvered-pergolas/" class="py-4 text-base font-medium border-b" style="border-color: rgba(15,30,22,0.07);">Louvered</a>
+    <a href="/planning-permission/" class="py-4 text-base font-medium border-b" style="border-color: rgba(15,30,22,0.07);">Planning</a>
+    <a href="/blog/" class="py-4 text-base font-medium border-b" style="border-color: rgba(15,30,22,0.07);">Blog</a>
+    <a href="/#quote" class="btn btn-primary mt-8">
+      Get Free Quotes
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M13 6l6 6-6 6" />
+      </svg>
+    </a>
+  </nav>
+</div>
+
+<script>
+  const toggle = document.getElementById('menu-toggle')!;
+  const menu = document.getElementById('mobile-menu')!;
+  const backdrop = document.getElementById('menu-backdrop')!;
+  const bars = toggle.querySelectorAll<HTMLElement>('.menu-bar');
+
+  function openMenu() {
+    menu.style.display = 'block';
+    menu.setAttribute('aria-hidden', 'false');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    bars[0].style.transform = 'translateY(6px) rotate(45deg)';
+    bars[1].style.opacity = '0';
+    bars[2].style.transform = 'translateY(-6px) rotate(-45deg)';
+  }
+
+  function closeMenu() {
+    menu.style.display = 'none';
+    menu.setAttribute('aria-hidden', 'true');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    bars[0].style.transform = '';
+    bars[1].style.opacity = '';
+    bars[2].style.transform = '';
+  }
+
+  toggle.addEventListener('click', () => {
+    menu.style.display === 'none' ? openMenu() : closeMenu();
+  });
+
+  backdrop.addEventListener('click', closeMenu);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+</script>
