@@ -32,8 +32,7 @@ src/
   lib/             site.ts, jsonld.ts
   pages/
     index.astro                                            Homepage
-    blog/                                                  Legacy redirects to /journal/
-    journal/                                               Journal listing + article pages
+    blog/                                                  Blog listing + article pages
     [slug].astro                                           Services + costs + guides (dynamic)
     locations/index.astro                                  Locations hub
     locations/[county]/pergola-installers.astro            County page
@@ -49,13 +48,13 @@ public/
 - New county: append to `src/data/counties.ts`
 - New town: append to `src/data/towns.ts` (must reference an existing county slug)
 - New service / cost / guide page: append to the relevant data file — the route is auto-generated
-- New journal article: add a Markdown file to `src/content/blog/`; it publishes under `/journal/<slug>/`
+- New blog article: add a Markdown file to `src/content/blog/`; it publishes under `/blog/<slug>/`
 
 URL patterns:
 - `/locations/<county-slug>/pergola-installers/`
 - `/locations/<county-slug>/<town-slug>/pergola-installers/`
 - `/<slug>/` for services, costs and guides
-- `/journal/<slug>/` for journal articles
+- `/blog/<slug>/` for blog articles
 
 ## Lead intake
 
