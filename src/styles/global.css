@@ -220,6 +220,7 @@ textarea.input:focus {
   line-height: 1.7;
 }
 .prose-content p { @apply mb-5; }
+.prose-content > :first-child { margin-top: 0; }
 .prose-content h2 {
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 3vw, 2.2rem);
@@ -235,13 +236,70 @@ textarea.input:focus {
   margin: 2rem 0 0.75rem;
   letter-spacing: -0.018em;
 }
-.prose-content ul { @apply list-disc pl-6 mb-5 space-y-1.5; }
-.prose-content ol { @apply list-decimal pl-6 mb-5 space-y-1.5; }
+.prose-content ul { @apply list-disc pl-6 mb-6 space-y-2; }
+.prose-content ol { @apply list-decimal pl-6 mb-6 space-y-2; }
 .prose-content a {
   color: var(--color-moss);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
+}
+.prose-content strong {
+  font-weight: 600;
+}
+.prose-content blockquote {
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+  border-left: 4px solid var(--color-clay);
+  background: var(--color-stone-soft);
+  border-radius: 0 18px 18px 0;
+  color: var(--color-moss);
+}
+.prose-content table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 2rem 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid rgba(15, 30, 22, 0.1);
+  border-radius: 18px;
+  background: var(--color-paper);
+  box-shadow: 0 16px 42px rgba(15, 30, 22, 0.06);
+}
+.prose-content thead {
+  background: var(--color-moss);
+  color: var(--color-cream);
+}
+.prose-content th,
+.prose-content td {
+  min-width: 12rem;
+  padding: 1rem 1.1rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(15, 30, 22, 0.08);
+}
+.prose-content th {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.prose-content td {
+  color: var(--color-mist);
+}
+.prose-content tbody tr:nth-child(even) {
+  background: var(--color-stone-soft);
+}
+.prose-content tbody tr:last-child td {
+  border-bottom: 0;
+}
+.prose-content hr {
+  margin: 2.5rem 0;
+  border: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(15, 30, 22, 0.16), transparent);
 }
 
 /* ─── Texture ───────────────────────────────────────────────── */
