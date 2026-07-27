@@ -184,7 +184,7 @@ DIY can reduce labour costs when you have a straightforward kit, a suitable base
 
 Check the manufacturer's installation requirements before choosing DIY. Incorrect anchoring, poor levelling or unauthorised electrical work may affect safety, roof performance and warranty cover.
 
-Professional installation is most valuable when the installer takes responsibility for the complete specification rather than only assembling the frame. The commercial [pergola installation guide](/pergola-installation/) explains the usual process from survey to handover.
+Professional installation is most valuable when the installer takes responsibility for the complete specification rather than only assembling the frame. Compare the responsibilities and likely savings in our guide to [pergola kits versus professional installation](/blog/pergola-kits-vs-professionally-installed-pergolas/), then review the commercial [pergola installation guide](/pergola-installation/) for the usual process from survey to handover.
 
 ## How long does installation take?
 

@@ -54,4 +54,6 @@ If you want a louvered or motorised roof, aluminium is effectively your only opt
 
 Whichever material you prefer, compare the finished project rather than the frame alone. The [pergola installation cost guide](/blog/how-much-does-a-pergola-cost-uk/) covers foundations, labour, drainage, electrics and common extras.
 
+If you are considering self-assembly, compare [pergola kits with professionally installed pergolas](/blog/pergola-kits-vs-professionally-installed-pergolas/) before judging the saving by product price alone.
+
 [Get quotes for both types →](/pergola-installation/#quote)

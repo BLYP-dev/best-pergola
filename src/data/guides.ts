@@ -78,25 +78,49 @@ export const guidePages: GuidePage[] = [
     name: 'How Long Does Pergola Installation Take?',
     slug: 'how-long-does-pergola-installation-take',
     intro:
-      'A standard pergola installation in the UK takes 1–3 days on site, with motorised louvered builds running 2–5 days. Lead times from order to installation are typically 4–10 weeks depending on the installer, season and product choice.',
+      'A standard pergola installation in the UK usually takes 1–3 days on site. Larger louvered, motorised or screened systems commonly take 2–5 days, while complex multi-bay or glazed projects can take longer. The complete timeline is normally measured in weeks because survey, design approval, groundwork, manufacture and scheduling happen before the structure is erected.',
     sections: [
       {
-        heading: 'Survey and design (1–2 weeks)',
-        body: 'After accepting a quote, your installer will normally book a site survey to confirm measurements, access and foundations. CAD drawings or visualisations are usually provided within a week of the survey for sign-off.',
+        heading: 'Quick answer: on-site work usually takes 1–5 days',
+        body: 'Allow around 1–2 days for a straightforward timber or fixed-roof pergola, 2–3 days for a standard louvered aluminium system, and 3–5 days for a larger motorised pergola with lighting, drainage or side screens. These are planning ranges, not guarantees: size, foundations, access, weather and the number of installers all affect the programme.',
       },
       {
-        heading: 'Manufacturing and lead time (3–8 weeks)',
-        body: 'Aluminium pergolas are typically manufactured to order, often imported from European factories. Standard lead times run 4–8 weeks, longer in peak summer demand. Custom finishes and oversized builds can take 8–12 weeks.',
+        heading: 'Total project time is longer than installation time',
+        body: 'The days spent erecting the pergola are only the final site phase. A surveyed, made-to-measure project commonly takes 4–10 weeks from order to completion. Stock self-assembly products may dispatch much sooner, while bespoke colours, oversized spans, glazing or imported components can extend the schedule. Ask for separate survey, manufacture, groundwork and installation dates.',
       },
       {
-        heading: 'On-site installation (1–5 days)',
-        body: 'Wooden pergolas: 1–2 days. Standard fixed-roof aluminium: 1–2 days. Louvered aluminium: 2–3 days. Motorised louvered with side screens, lighting and heating: 3–5 days. Add 1 day for groundworks if foundations are not yet ready.',
+        heading: 'Stage 1: quotation and site survey',
+        body: 'The installer needs enough information to assess likely size, access, position and budget before surveying. The site survey confirms levels, dimensions, door and window clearances, the existing surface, fixing points, drainage and safe electrical routes. Some UK suppliers indicate survey appointments around one to two weeks after sign-off, although availability varies.',
+      },
+      {
+        heading: 'Stage 2: design approval and manufacture',
+        body: 'Check the final dimensions, post positions, roof operation, colour, drainage outlets, controls and optional sides before approving the order. Standard stock products can move quickly, but made-to-measure aluminium systems are manufactured or prepared after approval. Changes made after sign-off may restart part of the lead time or incur additional cost.',
+      },
+      {
+        heading: 'Stage 3: foundations and preparation',
+        body: 'Foundation work may happen before the pergola team arrives or form part of the installation programme. Existing concrete can be quick when it is level and structurally suitable. Porcelain paving, decking, slopes, soft ground and hidden drainage can require pads, reinforcement or remedial work. Concrete may also need curing time before the frame is loaded.',
+      },
+      {
+        heading: 'Stage 4: frame and roof installation',
+        body: 'The team sets out the post positions, erects and levels the frame, fits the roof and anchors the structure. Louvre systems need accurate alignment so blades operate correctly and water reaches the gutters. Wall-mounted pergolas also require careful flashing, fixing and coordination with doors, windows and the house rainwater system.',
+      },
+      {
+        heading: 'Stage 5: electrics, screens and commissioning',
+        body: 'Motorised roofs, lighting, heaters, rain sensors and powered blinds add installation and testing time. Side screens or sliding glazing are often fitted after the main structure is level. At handover, controls, drainage and moving parts should be tested, care instructions explained and warranty documents supplied.',
+      },
+      {
+        heading: 'What commonly delays a pergola installation?',
+        body: 'Typical causes include late design changes, unsuitable foundations, restricted access, missing components, custom finishes, electrical work that was not planned, poor weather and peak-season scheduling. Planning or listed-building requirements can delay ordering as well. Resolve the specification and permissions before manufacture rather than relying on the short on-site duration.',
+      },
+      {
+        heading: 'How to keep the programme on track',
+        body: 'Send clear site and access photographs early, disclose paving or decking construction where known, agree who handles foundations and electrics, and approve drawings promptly. Ask the installer to distinguish estimated lead time from confirmed installation dates. Avoid arranging landscaping, events or furniture delivery until the structure has been installed and handed over.',
       },
     ],
     faqs: [],
     metaTitle: 'How Long Does Pergola Installation Take? | BestPergola.co.uk',
     metaDescription:
-      'UK pergola installation typically takes 1–5 days on site, with 4–10 week lead times from order. Full timeline guide plus free quotes from trusted installers.',
+      'UK pergola installation usually takes 1–5 days on site. See the complete survey, groundwork, manufacturing and fitting timeline before requesting quotes.',
   },
   {
     name: 'Wood vs Aluminium Pergola',
