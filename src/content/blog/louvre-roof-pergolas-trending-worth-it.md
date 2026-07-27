@@ -185,7 +185,7 @@ There's also the matter of experience. Louvre roof pergolas involve concealed dr
 
 Our [pergola cost guide](/pergola-cost/) sets out what realistic budgets look like across the different system types, so you can arrive at those conversations knowing roughly what represents fair value — and what should raise an eyebrow.
 
-[Compare quotes from pergola installers near you →](/#quote)
+[Compare quotes from pergola installers near you →](/pergola-installation/#quote)
 
 ## So, Are They Worth It?
 

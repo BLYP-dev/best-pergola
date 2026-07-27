@@ -36,9 +36,9 @@ export const services: Service[] = [
         a: 'On-site work is usually 1–3 days for a standard pergola and 2–5 days for larger motorised builds. Lead times from order to installation are typically 4–10 weeks depending on the installer and time of year.',
       },
     ],
-    metaTitle: 'Pergola Installation UK | Costs, Process & Free Quotes | BestPergola.co.uk',
+    metaTitle: 'Pergola Installers Near Me | UK Installation Quotes | BestPergola.co.uk',
     metaDescription:
-      'Professional pergola installation across the UK. Learn what is included, typical costs, installation timelines and how to get free quotes from trusted local pergola installers.',
+      'Find pergola installers near you. Compare UK installation costs, companies and free quotes for aluminium, louvered, motorised and garden pergolas.',
   },
   {
     name: 'Aluminium Pergolas',

@@ -124,7 +124,7 @@ The 2026 heat dome showed how quickly UK gardens can become too hot to enjoy. A 
 
 If you are planning ahead for hotter summers, start with a few quotes from suitable installers. Compare materials, automation options, side screens, foundations, drainage, and lead times before choosing a system.
 
-[Get free pergola quotes from installers near you](/#quote)
+[Get free pergola quotes from installers near you](/pergola-installation/#quote)
 
 ## Frequently Asked Questions
 

@@ -10,6 +10,9 @@ type Lead = {
   town?: string;
   county?: string;
   pergolaType?: string;
+  roofType?: string;
+  approximateSize?: string;
+  installationSurface?: string;
   budget?: string;
   timeframe?: string;
   notes?: string;
@@ -73,6 +76,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
     town: body.town?.toString().trim() ?? '',
     county: body.county?.toString().trim() ?? '',
     pergolaType: body.pergolaType?.toString().trim() ?? '',
+    roofType: body.roofType?.toString().trim() ?? '',
+    approximateSize: body.approximateSize?.toString().trim() ?? '',
+    installationSurface: body.installationSurface?.toString().trim() ?? '',
     budget: body.budget?.toString().trim() ?? '',
     timeframe: body.timeframe?.toString().trim() ?? '',
     notes: body.notes?.toString().trim() ?? '',
@@ -133,7 +139,12 @@ async function postToAirtable(lead: Record<string, string>, env: Env): Promise<v
             'Pergola Type': lead.pergolaType || undefined,
             Budget: lead.budget || undefined,
             Timeframe: lead.timeframe || undefined,
-            Notes: lead.notes || undefined,
+            Notes: [
+              lead.roofType ? `Roof type: ${lead.roofType}` : '',
+              lead.approximateSize ? `Approximate size: ${lead.approximateSize}` : '',
+              lead.installationSurface ? `Installation surface: ${lead.installationSurface}` : '',
+              lead.notes ? `Notes: ${lead.notes}` : '',
+            ].filter(Boolean).join('\n') || undefined,
             Status: 'New',
             'Received At': lead.receivedAt,
             Referer: lead.referer || undefined,
@@ -192,6 +203,9 @@ function formatLeadEmail(lead: Record<string, string>): string {
     `Location: ${lead.town || '—'}, ${lead.county || '—'} (${lead.postcode})`,
     ``,
     `Pergola type: ${lead.pergolaType || '—'}`,
+    `Roof type: ${lead.roofType || '—'}`,
+    `Approximate size: ${lead.approximateSize || '—'}`,
+    `Installation surface: ${lead.installationSurface || '—'}`,
     `Budget: ${lead.budget || '—'}`,
     `Timeframe: ${lead.timeframe || '—'}`,
     ``,
@@ -215,6 +229,9 @@ function formatLeadHtml(lead: Record<string, string>): string {
         ${row('Email', lead.email)}
         ${row('Phone', lead.phone)}
         ${row('Pergola type', lead.pergolaType)}
+        ${row('Roof type', lead.roofType)}
+        ${row('Approximate size', lead.approximateSize)}
+        ${row('Installation surface', lead.installationSurface)}
         ${row('Budget', lead.budget)}
         ${row('Timeframe', lead.timeframe)}
       </table>

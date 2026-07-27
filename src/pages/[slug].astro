@@ -7,6 +7,7 @@ import CTABox from '@components/CTABox.astro';
 import FAQ from '@components/FAQ.astro';
 import QuoteForm from '@components/QuoteForm.astro';
 import CostTable from '@components/CostTable.astro';
+import PergolaInstallationLanding from '@components/PergolaInstallationLanding.astro';
 import { services } from '@data/services';
 import { costPages } from '@data/costs';
 import { guidePages } from '@data/guides';
@@ -41,9 +42,10 @@ const breadcrumbs = [
 ];
 
 const faqs = service?.faqs ?? costPage?.faqs ?? guide?.faqs ?? [];
+const isInstallationLanding = slug === 'pergola-installation';
 
 const jsonLd: Record<string, unknown>[] = [];
-if (faqs.length > 0) jsonLd.push(faqLd(faqs));
+if (faqs.length > 0 && !isInstallationLanding) jsonLd.push(faqLd(faqs));
 if (service) {
   jsonLd.push(serviceLd({ name: service.name, description: service.description, url: pageUrl }));
 }
@@ -55,6 +57,9 @@ if (service) {
   breadcrumbs={breadcrumbs}
   jsonLd={jsonLd}
 >
+  {isInstallationLanding ? (
+    <PergolaInstallationLanding />
+  ) : (
   <div class="container-tight py-10 md:py-14">
     <Breadcrumbs items={breadcrumbs} />
 
@@ -211,4 +216,5 @@ if (service) {
 
     <QuoteForm />
   </div>
+  )}
 </PageLayout>

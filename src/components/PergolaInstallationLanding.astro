@@ -1,0 +1,509 @@
+---
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import CostTable from '@components/CostTable.astro';
+import FAQ from '@components/FAQ.astro';
+import LocationGrid from '@components/LocationGrid.astro';
+import QuoteForm from '@components/QuoteForm.astro';
+import TrustBox from '@components/TrustBox.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Pergola installation', url: '/pergola-installation/' },
+];
+
+const priceRows = [
+  { label: 'Timber pergola, supplied and fitted', range: '£1,500–£4,500', notes: 'Simple open-roof structure on prepared ground' },
+  { label: 'Aluminium pergola, fixed roof', range: '£4,000–£8,000', notes: 'Low-maintenance frame with a fixed canopy or roof' },
+  { label: 'Louvered aluminium pergola', range: '£6,000–£12,000', notes: 'Adjustable blades with integrated rainwater drainage' },
+  { label: 'Motorised louvered pergola', range: '£8,000–£16,000', notes: 'Powered roof controls, installation and commissioning' },
+  { label: 'Premium build with screens and lighting', range: '£12,000–£25,000+', notes: 'Made-to-measure structure with integrated extras' },
+];
+
+const faqs = [
+  {
+    q: 'How much does pergola installation cost in the UK?',
+    a: 'A professionally supplied and installed pergola typically costs £1,500–£25,000+. Simple timber structures sit at the lower end, while made-to-measure motorised aluminium pergolas with side screens, lighting and heating cost more. Foundations, access and electrical work can also affect the final quote.',
+  },
+  {
+    q: 'How do I find pergola installers near me?',
+    a: 'Tell us your postcode, preferred pergola type, budget and timeframe. We use those details to identify suitable pergola companies that cover your area. You can then discuss the design, survey and quote directly before deciding whether to proceed.',
+  },
+  {
+    q: 'What should a pergola installation quote include?',
+    a: 'A useful quote should state the structure dimensions and specification, foundations, delivery, installation labour, drainage, electrical work, removal of waste, VAT, warranty terms and any exclusions. Ask whether planning advice and a site survey are included.',
+  },
+  {
+    q: 'How long does a pergola take to install?',
+    a: 'Most standard pergolas take one to three days on site. Larger motorised or screened installations often take two to five days. The full lead time from survey and order to installation is commonly four to ten weeks.',
+  },
+  {
+    q: 'Do pergola installers prepare the foundations?',
+    a: 'Many full-service pergola installers include concrete pads, ground screws or other suitable foundations, but this must be confirmed in writing. Existing patios may need lifting or reinforcement, and drainage should be considered before work begins.',
+  },
+  {
+    q: 'Will I need planning permission?',
+    a: 'Many domestic pergolas fall within permitted development, but height, position, listed-building status and designated areas can change the rules. Your installer may advise, but the homeowner remains responsible for confirming requirements with the local planning authority.',
+  },
+  {
+    q: 'Are pergola kits worth it?',
+    a: 'A kit can suit a confident DIY buyer with helpers, suitable tools and a solid, level base. The supply price does not normally solve groundwork, accurate levelling, anchoring, drainage or electrical work. Professional installation is usually the safer choice when the site needs preparation or the pergola has a roof, screens or motorised parts.',
+  },
+  {
+    q: 'Can a pergola be installed on decking or a patio?',
+    a: 'Yes, but the structure must transfer its loads into something suitable. Sound concrete and paving may accept appropriate fixings, porcelain needs a careful drilling and anchoring method, decking may need reinforced joists or pads below, and soft ground usually needs purpose-built foundations.',
+  },
+  {
+    q: 'What sides can be added to a pergola?',
+    a: 'Common options include timber slats, privacy panels, pull-down blinds, retractable windscreens, louvered side walls and sliding glazed panels. Screens mainly control sun and wind, while louvered or glazed sides create a more enclosed outdoor-room feel.',
+  },
+];
+---
+
+<div class="container-tight pt-10 md:pt-14">
+  <Breadcrumbs items={breadcrumbs} />
+</div>
+
+<section class="container-tight pb-14 md:pb-20">
+  <div class="surface-moss noise overflow-hidden">
+    <div class="grid lg:grid-cols-[1.35fr_.65fr]">
+      <div class="p-7 md:p-12 lg:p-14">
+        <div class="eyebrow mb-5" style="color: rgba(241,233,216,.68);">UK-wide installer matching</div>
+        <h1 class="display text-4xl md:text-6xl lg:text-7xl" style="color: var(--color-cream);">
+          Find pergola installers near you.
+        </h1>
+        <p class="mt-6 text-lg md:text-xl leading-relaxed max-w-3xl" style="color: rgba(241,233,216,.82);">
+          Compare pergola installation options for your home. Tell us where you are, what you
+          want to build and your likely budget—we’ll help match you with suitable pergola
+          companies covering your area.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#quote" class="btn btn-clay btn-lg">
+            Get free installation quotes
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </a>
+          <a href="#costs" class="btn btn-secondary btn-lg" style="color: var(--color-cream); border-color: rgba(241,233,216,.28);">See installed prices</a>
+        </div>
+        <p class="mt-5 text-sm" style="color: rgba(241,233,216,.62);">
+          Free for homeowners · No obligation · You choose whether to proceed
+        </p>
+      </div>
+
+      <aside class="p-7 md:p-10 lg:p-12 flex flex-col justify-end" style="background: rgba(15,30,22,.28);">
+        <div class="font-mono text-xs uppercase tracking-[.16em]" style="color: rgba(241,233,216,.58);">Typical project</div>
+        <div class="font-display text-4xl md:text-5xl mt-3" style="color: var(--color-cream);">£5k–£12k</div>
+        <p class="mt-3 text-sm leading-relaxed" style="color: rgba(241,233,216,.72);">
+          A common range for a professionally installed aluminium or louvered pergola.
+        </p>
+        <div class="mt-8 pt-7 border-t" style="border-color: rgba(241,233,216,.15);">
+          <div class="grid grid-cols-2 gap-5">
+            <div>
+              <div class="font-display text-2xl" style="color: var(--color-cream);">1–5 days</div>
+              <div class="text-xs mt-1" style="color: rgba(241,233,216,.58);">On-site work</div>
+            </div>
+            <div>
+              <div class="font-display text-2xl" style="color: var(--color-cream);">4–10 wks</div>
+              <div class="text-xs mt-1" style="color: rgba(241,233,216,.58);">Typical lead time</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<div class="container-tight">
+  <nav aria-label="On this page" class="surface px-5 py-4 md:px-7 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+    <span class="font-medium">On this page</span>
+    <a href="#costs" class="underline decoration-[color:var(--color-clay)] underline-offset-4">Installed costs</a>
+    <a href="#types" class="underline decoration-[color:var(--color-clay)] underline-offset-4">Types compared</a>
+    <a href="#kits" class="underline decoration-[color:var(--color-clay)] underline-offset-4">Kits vs installation</a>
+    <a href="#included" class="underline decoration-[color:var(--color-clay)] underline-offset-4">What is included</a>
+    <a href="#process" class="underline decoration-[color:var(--color-clay)] underline-offset-4">Installation process</a>
+    <a href="#choose" class="underline decoration-[color:var(--color-clay)] underline-offset-4">Choosing an installer</a>
+    <a href="#areas" class="underline decoration-[color:var(--color-clay)] underline-offset-4">Areas covered</a>
+  </nav>
+
+  <TrustBox />
+
+  <section class="my-16 md:my-24 grid lg:grid-cols-[.75fr_1.25fr] gap-10 lg:gap-16">
+    <div>
+      <div class="eyebrow mb-4">Professional installation</div>
+      <h2 class="display text-3xl md:text-5xl">One project, properly coordinated.</h2>
+    </div>
+    <div class="prose-content">
+      <p>
+        Professional pergola installation is more than assembling a frame. The installer needs
+        to confirm dimensions, ground conditions, drainage, fixing points and safe electrical
+        routes before the structure arrives. For louvered and motorised pergolas, accurate
+        levelling is particularly important so the roof closes correctly and water reaches the
+        integrated gutters.
+      </p>
+      <p>
+        BestPergola.co.uk is an independent matching service, not the installer. We help UK
+        homeowners find pergola installers and pergola companies that cover their location.
+        You remain free to compare the specification, price, warranty and availability before
+        accepting any quote.
+      </p>
+    </div>
+  </section>
+
+  <section id="types" class="my-16 md:my-24 scroll-mt-24">
+    <div class="mb-9 max-w-3xl">
+      <div class="eyebrow mb-4">Start with the material</div>
+      <h2 class="display text-3xl md:text-5xl">Wooden or aluminium pergola?</h2>
+      <p class="mt-5 text-lg leading-relaxed" style="color: var(--color-mist);">
+        The material changes the starting price, maintenance, roof choices and the kind of
+        installation your garden needs.
+      </p>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-4">
+      <article class="surface-stone p-7 md:p-10">
+        <div class="flex items-start justify-between gap-5">
+          <div>
+            <div class="eyebrow mb-3">Traditional and flexible</div>
+            <h3 class="display text-3xl md:text-4xl">Wooden pergola</h3>
+          </div>
+          <span class="chip">Supply from about £540</span>
+        </div>
+        <p class="mt-6 leading-relaxed" style="color: var(--color-mist);">
+          Timber offers the classic garden look and the lowest entry price. Lightweight open
+          frames suit planting and seating areas; heavier posts, larger spans, roof panels and
+          side walls increase the cost. Timber needs periodic inspection and treatment, and the
+          durability varies by species and construction.
+        </p>
+        <dl class="mt-7 grid grid-cols-2 gap-4 text-sm">
+          <div><dt class="eyebrow mb-1">Best for</dt><dd>Traditional gardens and open structures</dd></div>
+          <div><dt class="eyebrow mb-1">Upkeep</dt><dd>Regular checks and retreatment</dd></div>
+        </dl>
+        <a href="/garden-pergolas/" class="btn btn-secondary mt-7">Explore garden pergolas</a>
+      </article>
+      <article class="surface p-7 md:p-10">
+        <div class="flex items-start justify-between gap-5">
+          <div>
+            <div class="eyebrow mb-3">Low maintenance</div>
+            <h3 class="display text-3xl md:text-4xl">Aluminium pergola</h3>
+          </div>
+          <span class="chip">Supply from about £900</span>
+        </div>
+        <p class="mt-6 leading-relaxed" style="color: var(--color-mist);">
+          Powder-coated aluminium costs more initially but supports fixed, manual louvered and
+          motorised roofs, integrated gutters, lighting and modular sides. It is the stronger
+          fit when weather control and lower ongoing maintenance matter more than a traditional
+          timber appearance.
+        </p>
+        <dl class="mt-7 grid grid-cols-2 gap-4 text-sm">
+          <div><dt class="eyebrow mb-1">Best for</dt><dd>Roofed, all-season outdoor spaces</dd></div>
+          <div><dt class="eyebrow mb-1">Upkeep</dt><dd>Cleaning and mechanism checks</dd></div>
+        </dl>
+        <a href="/aluminium-pergolas/" class="btn btn-primary mt-7">Compare aluminium pergolas</a>
+      </article>
+    </div>
+    <p class="mt-4 text-xs leading-relaxed" style="color: var(--color-mist);">
+      Supply-only prices are indicative UK market snapshots and change with size, specification,
+      promotions and delivery. They are not installed quotations.
+    </p>
+  </section>
+
+  <div id="costs" class="scroll-mt-24">
+    <CostTable heading="Pergola installation costs in the UK" eyebrow="2026 installed prices" rows={priceRows} />
+  </div>
+
+  <section class="my-16 md:my-24">
+    <div class="grid lg:grid-cols-[.75fr_1.25fr] gap-10 lg:gap-16 items-start">
+      <div>
+        <div class="eyebrow mb-4">Supply price vs finished price</div>
+        <h2 class="display text-3xl md:text-5xl">The box price is not the project price.</h2>
+      </div>
+      <div>
+        <p class="text-lg leading-relaxed" style="color: var(--color-mist);">
+          Entry aluminium kits can appear below £1,000, while professional assembly services
+          are commonly advertised from roughly £450–£500 before specialist anchoring, wall
+          fixing or groundwork. A low supply price can therefore become £1,500–£2,400+ once
+          basic fitting and fixing are included—and more if the base needs work.
+        </p>
+        <div class="mt-7 surface overflow-hidden">
+          {[
+            ['Supply-only structure', 'Frame, roof components and standard hardware'],
+            ['Assembly', 'Labour to erect, align and commission the pergola'],
+            ['Anchoring', 'Correct fixings for concrete, paving, porcelain or reinforced decking'],
+            ['Groundwork', 'Pads, slabs, drainage changes or support below the finished surface'],
+            ['Electrical work', 'Power for motors, lighting, heating and controls where required'],
+          ].map(([label, detail], index) => (
+            <div class={`p-5 md:px-7 flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-8 ${index ? 'border-t' : ''}`}>
+              <span class="font-medium">{label}</span>
+              <span class="text-sm sm:text-right" style="color: var(--color-mist);">{detail}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="my-16 md:my-24 surface-stone p-7 md:p-12">
+    <div class="grid lg:grid-cols-[.8fr_1.2fr] gap-10 lg:gap-16">
+      <div>
+        <div class="eyebrow mb-4">What changes the quote</div>
+        <h2 class="display text-3xl md:text-5xl">The structure is only part of the price.</h2>
+        <p class="mt-5 leading-relaxed" style="color: var(--color-mist);">
+          Ask for an itemised quote. A lower headline price may exclude foundations, electrics,
+          delivery or VAT.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-3">
+        {[
+          ['Size and projection', 'Larger spans need more material and may require heavier structural sections.'],
+          ['Ground conditions', 'Slopes, drainage issues and unsuitable patios increase preparation work.'],
+          ['Roof system', 'Fixed, manual louvered and motorised roofs carry different component and labour costs.'],
+          ['Access', 'Restricted gardens, long carries and crane access can affect delivery and fitting.'],
+          ['Screens and glazing', 'Zip screens, sliding glass and privacy panels add hardware and installation time.'],
+          ['Power and lighting', 'Motors, LED lighting, heaters and sensors require a safe electrical supply.'],
+        ].map(([title, body]) => (
+          <div class="surface p-5 md:p-6">
+            <h3 class="font-display text-lg mb-2">{title}</h3>
+            <p class="text-sm leading-relaxed" style="color: var(--color-mist);">{body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="included" class="my-16 md:my-24 scroll-mt-24">
+    <div class="max-w-3xl mb-9">
+      <div class="eyebrow mb-4">Scope of work</div>
+      <h2 class="display text-3xl md:text-5xl">What a full pergola installation should include.</h2>
+      <p class="mt-5 text-lg leading-relaxed" style="color: var(--color-mist);">
+        Inclusions vary, so use this as a checklist when comparing pergola installation quotes.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {[
+        ['Site survey', 'Measurements, access, ground levels, drainage and fixing points checked before manufacture.'],
+        ['Design and specification', 'Agreed size, frame colour, roof, controls, screens and rainwater route.'],
+        ['Foundations and fixings', 'Suitable concrete pads, ground screws or structural connections for the site.'],
+        ['Delivery and assembly', 'Materials brought to site, frame erected, roof fitted and structure levelled.'],
+        ['Drainage and electrics', 'Gutters, downpipes and agreed power connections installed or coordinated.'],
+        ['Testing and handover', 'Moving parts tested, controls explained, site cleared and warranties provided.'],
+      ].map(([title, body], index) => (
+        <div class="surface p-6 md:p-7">
+          <div class="font-mono text-xs mb-5" style="color: var(--color-clay);">{String(index + 1).padStart(2, '0')}</div>
+          <h3 class="font-display text-xl mb-3">{title}</h3>
+          <p class="text-sm leading-relaxed" style="color: var(--color-mist);">{body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="process" class="my-16 md:my-24 scroll-mt-24">
+    <div class="surface-moss p-7 md:p-12">
+      <div class="max-w-3xl">
+        <div class="eyebrow mb-4" style="color: rgba(241,233,216,.62);">From enquiry to handover</div>
+        <h2 class="display text-3xl md:text-5xl" style="color: var(--color-cream);">How pergola installation works.</h2>
+      </div>
+      <ol class="mt-10 grid md:grid-cols-2 gap-x-12 gap-y-9">
+        {[
+          ['Share your project', 'Provide your postcode, likely dimensions, pergola type, budget and preferred timeframe.'],
+          ['Discuss options', 'A suitable installer can clarify the design, site access, power requirements and likely budget.'],
+          ['Survey and written quote', 'The site is measured and you receive a specification covering inclusions, exclusions and warranty.'],
+          ['Approve the design', 'Check dimensions, colours, roof operation, drainage and extras before manufacture or ordering.'],
+          ['Prepare and install', 'Foundations are completed, the structure is erected and electrical work is coordinated.'],
+          ['Test and hand over', 'Controls and drainage are checked, care guidance is explained and documentation is supplied.'],
+        ].map(([title, body], index) => (
+          <li class="grid grid-cols-[auto_1fr] gap-4">
+            <span class="font-mono text-xs mt-1" style="color: var(--color-clay);">{String(index + 1).padStart(2, '0')}</span>
+            <div>
+              <h3 class="font-display text-xl" style="color: var(--color-cream);">{title}</h3>
+              <p class="mt-2 text-sm leading-relaxed" style="color: rgba(241,233,216,.7);">{body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="my-16 md:my-24">
+    <div class="mb-9 max-w-3xl">
+      <div class="eyebrow mb-4">Pergola types</div>
+      <h2 class="display text-3xl md:text-5xl">Installation for every kind of garden project.</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
+      {[
+        ['/aluminium-pergolas/', 'Aluminium pergolas', 'Low-maintenance structures with fixed, louvered or retractable roofs.', '£4,000–£15,000'],
+        ['/louvered-pergolas/', 'Louvered pergolas', 'Adjustable roof blades for sunlight, shade and rain protection.', '£6,000–£18,000'],
+        ['/motorised-pergolas/', 'Motorised pergolas', 'Powered roofs, screens, lighting and optional weather sensors.', '£8,000–£22,000+'],
+        ['/garden-pergolas/', 'Garden pergolas', 'Freestanding timber or aluminium structures for seating and dining areas.', '£2,500–£15,000'],
+      ].map(([href, title, body, price]) => (
+        <a href={href} class="group surface p-6 md:p-8 flex justify-between gap-5 hover:-translate-y-0.5 transition-transform">
+          <div>
+            <h3 class="font-display text-xl md:text-2xl">{title}</h3>
+            <p class="mt-2 text-sm leading-relaxed" style="color: var(--color-mist);">{body}</p>
+            <div class="font-mono text-xs mt-5" style="color: var(--color-clay);">Typically {price} installed</div>
+          </div>
+          <span aria-hidden="true" class="text-xl opacity-35 group-hover:opacity-100 transition-opacity">↗</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="my-16 md:my-24 grid lg:grid-cols-2 gap-4">
+    <article class="surface p-7 md:p-10">
+      <div class="eyebrow mb-4">Pergola with roof</div>
+      <h2 class="display text-3xl md:text-4xl">Decide what “roof” needs to do.</h2>
+      <p class="mt-5 leading-relaxed" style="color: var(--color-mist);">
+        A pergola with roof might use clear fixed panels, a solid canopy, retractable fabric,
+        manual louvres or a motorised louvered system. Fixed roofs provide simple shelter.
+        Louvered roofs let you balance daylight, shade and rain protection, while motorisation
+        adds remote control and optional weather sensors.
+      </p>
+      <p class="mt-4 leading-relaxed" style="color: var(--color-mist);">
+        Check drainage, wind rating, light loss against the house and where rainwater will exit.
+        Those details matter more than the product label.
+      </p>
+      <div class="mt-7 flex flex-wrap gap-3">
+        <a href="/pergola-roofs/" class="btn btn-primary">Compare pergola roofs</a>
+        <a href="/louvered-pergolas/" class="btn btn-secondary">Louvered systems</a>
+      </div>
+    </article>
+    <article class="surface-stone p-7 md:p-10">
+      <div class="eyebrow mb-4">Pergola with sides</div>
+      <h2 class="display text-3xl md:text-4xl">Privacy, wind control or an outdoor room?</h2>
+      <p class="mt-5 leading-relaxed" style="color: var(--color-mist);">
+        “Sides” can mean timber slats, privacy panels, pull-down blinds, retractable windscreens,
+        louvered walls or sliding glass. Slats mainly add privacy and shade. Screens control
+        low sun and breeze. Louvre walls and glazed panels create much greater enclosure.
+      </p>
+      <p class="mt-4 leading-relaxed" style="color: var(--color-mist);">
+        Side upgrades commonly start in the hundreds and move into four figures for wider,
+        louvered or sliding systems. Include them in the initial survey so posts, tracks and
+        drainage are designed together.
+      </p>
+      <a href="/pergola-with-sides/" class="btn btn-primary mt-7">Compare pergola sides</a>
+    </article>
+  </section>
+
+  <section id="kits" class="my-16 md:my-24 scroll-mt-24">
+    <div class="surface-moss overflow-hidden">
+      <div class="grid lg:grid-cols-[.72fr_1.28fr]">
+        <div class="p-7 md:p-10 lg:p-12" style="background: rgba(15,30,22,.3);">
+          <div class="eyebrow mb-4" style="color: rgba(241,233,216,.62);">Pergola kits</div>
+          <h2 class="display text-3xl md:text-5xl" style="color: var(--color-cream);">
+            A kit is a product, not a finished installation.
+          </h2>
+          <p class="mt-5 leading-relaxed" style="color: rgba(241,233,216,.72);">
+            Kits can work well for capable DIY buyers with a ready-made base, tools, helpers
+            and time. The risk is assuming assembly is the only job.
+          </p>
+        </div>
+        <div class="p-7 md:p-10 lg:p-12">
+          <h3 class="font-display text-2xl" style="color: var(--color-cream);">Before choosing DIY, confirm:</h3>
+          <ul class="mt-7 grid sm:grid-cols-2 gap-4">
+            {[
+              'The base is solid, level and suitable for structural fixings',
+              'The frame can be anchored without damaging paving or waterproofing',
+              'Decking has reinforced support below each post',
+              'Soft ground has correctly sized concrete pads or foundations',
+              'The roof fall and rainwater route work with the finished patio',
+              'Wall fixings, motors and electrics are handled by competent people',
+              'The installation method preserves the product warranty',
+              'Enough people are available to lift and align the components safely',
+            ].map((item) => (
+              <li class="flex gap-3 text-sm leading-relaxed" style="color: rgba(241,233,216,.76);">
+                <span aria-hidden="true" style="color: var(--color-clay);">✓</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <a href="#quote" class="btn btn-clay mt-8">Compare professional installation quotes</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="choose" class="my-16 md:my-24 scroll-mt-24 grid lg:grid-cols-[.8fr_1.2fr] gap-10 lg:gap-16">
+    <div>
+      <div class="eyebrow mb-4">Compare companies</div>
+      <h2 class="display text-3xl md:text-5xl">How to choose a pergola installer.</h2>
+      <p class="mt-5 leading-relaxed" style="color: var(--color-mist);">
+        Do not compare on price alone. Compare the same scope, specification and level of protection.
+      </p>
+    </div>
+    <div class="surface overflow-hidden">
+      {[
+        ['Relevant installations', 'Ask to see recent work using the same material and roof system you are considering.'],
+        ['Detailed specification', 'Dimensions, finishes, foundations, drainage, electrics and exclusions should be written down.'],
+        ['Insurance and warranties', 'Confirm public liability cover and separate structural, finish and motor warranties.'],
+        ['Planning awareness', 'A good installer flags likely constraints without pretending to replace the planning authority.'],
+        ['Clear payment stages', 'Deposits and stage payments should correspond to survey, manufacture, delivery and completion.'],
+        ['Aftercare', 'Know who handles adjustments, replacement parts and warranty claims after handover.'],
+      ].map(([title, body], index) => (
+        <div class={`p-6 md:px-8 md:py-6 ${index ? 'border-t' : ''}`}>
+          <h3 class="font-display text-lg">{title}</h3>
+          <p class="mt-1.5 text-sm leading-relaxed" style="color: var(--color-mist);">{body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="my-16 md:my-24">
+    <div class="mb-9 max-w-3xl">
+      <div class="eyebrow mb-4">Patios, decking and soft ground</div>
+      <h2 class="display text-3xl md:text-5xl">The right fixing starts below the surface.</h2>
+      <p class="mt-5 text-lg leading-relaxed" style="color: var(--color-mist);">
+        A site survey should establish what is beneath the visible finish, not simply whether
+        the garden looks flat.
+      </p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {[
+        ['Concrete or paving', 'The substrate must be sound enough for the specified anchors; loose or hollow areas need attention.'],
+        ['Porcelain patio', 'Drilling and bolt-down require suitable tools and care to avoid cracking the finished slabs.'],
+        ['Decking', 'Posts normally need reinforced joists, structural blocking or foundations below the deck—not boards alone.'],
+        ['Soil or lawn', 'Purpose-built pads, piles or another engineered foundation keep the frame level and resist wind loads.'],
+      ].map(([title, body]) => (
+        <article class="surface p-6">
+          <h3 class="font-display text-xl">{title}</h3>
+          <p class="mt-3 text-sm leading-relaxed" style="color: var(--color-mist);">{body}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="my-16 md:my-24 grid md:grid-cols-2 gap-4">
+    <div class="surface-stone p-7 md:p-10">
+      <div class="eyebrow mb-4">Before installation</div>
+      <h2 class="display text-3xl md:text-4xl">Planning permission and site preparation.</h2>
+      <p class="mt-5 leading-relaxed" style="color: var(--color-mist);">
+        Most domestic projects are straightforward, but boundary height, listed properties,
+        conservation areas and large structures deserve an early check.
+      </p>
+      <div class="mt-7 flex flex-wrap gap-3">
+        <a href="/planning-permission/" class="btn btn-primary">Planning guide</a>
+        <a href="/pergola-height-rules/" class="btn btn-secondary">Height rules</a>
+      </div>
+    </div>
+    <div class="surface p-7 md:p-10">
+      <div class="eyebrow mb-4">Timing</div>
+      <h2 class="display text-3xl md:text-4xl">Allow time for survey and manufacture.</h2>
+      <p class="mt-5 leading-relaxed" style="color: var(--color-mist);">
+        The work on site is often brief. Made-to-measure manufacture and peak-season schedules
+        account for most of the four-to-ten-week lead time.
+      </p>
+      <a href="/how-long-does-pergola-installation-take/" class="btn btn-secondary mt-7">See the full timeline</a>
+    </div>
+  </section>
+
+  <section id="areas" class="scroll-mt-24">
+    <LocationGrid
+      eyebrow="UK coverage"
+      heading="Find pergola installers near you"
+      subheading="Browse the counties we currently cover, or share your postcode and we’ll identify suitable pergola companies for your area."
+      limit={20}
+    />
+  </section>
+
+  <FAQ heading="Pergola installation questions" faqs={faqs} />
+
+  <QuoteForm
+    heading="Compare Pergola Installation Quotes"
+    subheading="Share your location and project details. We’ll help match you with suitable pergola installers covering your area."
+  />
+</div>

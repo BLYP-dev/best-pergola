@@ -40,6 +40,31 @@ const timeframes = [
   '6+ months',
   'Researching only',
 ];
+
+const roofTypes = [
+  'Open roof',
+  'Fixed roof',
+  'Manual louvered roof',
+  'Motorised louvered roof',
+  'Retractable canopy',
+  'Not sure yet',
+];
+
+const approximateSizes = [
+  'Up to 3m × 3m',
+  'Around 3m × 4m',
+  'Around 4m × 4m',
+  'Larger than 4m × 4m',
+  'Not measured yet',
+];
+
+const surfaces = [
+  'Concrete or paved patio',
+  'Porcelain patio',
+  'Decking',
+  'Soil or lawn',
+  'Not sure',
+];
 ---
 
 <section id={id} class="my-16 md:my-24 scroll-mt-24">
@@ -136,6 +161,30 @@ const timeframes = [
           <select class="input" id="budget" name="budget">
             <option value="">— Select —</option>
             {budgets.map((b) => <option value={b}>{b}</option>)}
+          </select>
+        </div>
+
+        <div>
+          <label class="label" for="roofType">Roof type</label>
+          <select class="input" id="roofType" name="roofType">
+            <option value="">— Select —</option>
+            {roofTypes.map((r) => <option value={r}>{r}</option>)}
+          </select>
+        </div>
+
+        <div>
+          <label class="label" for="approximateSize">Approximate size</label>
+          <select class="input" id="approximateSize" name="approximateSize">
+            <option value="">— Select —</option>
+            {approximateSizes.map((s) => <option value={s}>{s}</option>)}
+          </select>
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="label" for="installationSurface">Installation surface</label>
+          <select class="input" id="installationSurface" name="installationSurface">
+            <option value="">— Select —</option>
+            {surfaces.map((s) => <option value={s}>{s}</option>)}
           </select>
         </div>
 
