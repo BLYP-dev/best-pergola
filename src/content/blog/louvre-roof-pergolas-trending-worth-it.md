@@ -109,7 +109,7 @@ Additional costs commonly include:
 
 It's worth viewing the project as an outdoor extension rather than simply buying a garden product.
 
-For a detailed breakdown of what drives these costs — and what typical UK homeowners are spending across different pergola types — our [complete pergola cost guide](/pergola-cost/) covers the numbers in full.
+For a detailed breakdown of the finished-project budget, our [pergola installation cost guide](/blog/how-much-does-a-pergola-cost-uk/) explains labour, foundations, drainage, electrics and common extras. You can also compare price bands by system in the [complete pergola cost guide](/pergola-cost/).
 
 ## Will You Need Planning Permission?
 

@@ -52,4 +52,6 @@ Powder-coated aluminium has become the dominant choice for new-build homes and c
 
 If you want a louvered or motorised roof, aluminium is effectively your only option. If budget is tight and you're happy to maintain it, timber is a perfectly good choice that can look stunning in the right garden.
 
-[Get quotes for both types →](/#quote)
+Whichever material you prefer, compare the finished project rather than the frame alone. The [pergola installation cost guide](/blog/how-much-does-a-pergola-cost-uk/) covers foundations, labour, drainage, electrics and common extras.
+
+[Get quotes for both types →](/pergola-installation/#quote)

@@ -101,4 +101,6 @@ A pergola is most worthwhile when it solves a specific problem. Decide whether y
 
 If you only want a frame for climbing plants, a straightforward timber pergola may be enough. If you expect to dine outside despite showers or want an outdoor room used across more of the year, a drained roof, side protection and professional foundations become more important.
 
-Once you have a clear use and rough dimensions, compare the full specification rather than the frame price alone. BestPergola can help you [compare pergola installation options and request quotes](/pergola-installation/#quote) from installers covering your area.
+Once you have a clear use and rough dimensions, compare the full specification rather than the frame price alone. Our guide to [pergola installation costs](/blog/how-much-does-a-pergola-cost-uk/) explains how the roof, foundations, access and extras affect the finished budget.
+
+BestPergola can help you [compare pergola installation options and request quotes](/pergola-installation/#quote) from installers covering your area.
