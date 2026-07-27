@@ -34,6 +34,8 @@ A louvred pergola fundamentally changes how you use your garden.
 
 Rather than waiting for perfect weather, you can adjust the roof to suit changing conditions throughout the day. Bright afternoon sun becomes filtered shade. A passing shower becomes a minor inconvenience rather than the end of lunch outdoors.
 
+That flexibility covers several of the [most practical uses for a pergola](/blog/what-are-pergolas-used-for/), from shading a patio to sheltering an outdoor dining area.
+
 For UK homeowners, where sunshine and rain often arrive within the same hour, that adaptability makes a noticeable difference.
 
 There's also an aesthetic appeal that's difficult to ignore.

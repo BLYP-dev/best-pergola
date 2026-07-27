@@ -10,6 +10,8 @@ imageAlt: "Aluminium louvered pergola in a UK garden"
 
 Pergola prices in the UK vary considerably depending on material, size, and how mechanised the roof is. Most homeowners spend somewhere between **£3,000 and £15,000** fully installed, but motorised louvered pergolas with full side screens can push well past £20,000.
 
+Before comparing prices, be clear about [how you plan to use the pergola](/blog/what-are-pergolas-used-for/). A simple support for climbing plants and a rain-protected outdoor room sit in very different budget ranges.
+
 ## What drives the cost?
 
 Three factors account for the majority of the variation:

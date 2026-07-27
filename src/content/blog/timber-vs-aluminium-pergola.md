@@ -8,7 +8,7 @@ image: "/blog/timber-vs-aluminium.jpg"
 imageAlt: "Side-by-side timber and aluminium pergola in a UK garden"
 ---
 
-The single biggest decision when buying a pergola isn't size or colour — it's **material**. Timber and aluminium look worlds apart, perform differently, and sit at opposite ends of the maintenance curve.
+The single biggest decision when buying a pergola isn't size or colour — it's **material**. Timber and aluminium look worlds apart, perform differently, and sit at opposite ends of the maintenance curve. Start by deciding [what you want the pergola to be used for](/blog/what-are-pergolas-used-for/), because a plant-covered garden feature and a weather-resistant outdoor dining space need different specifications.
 
 ## Timber pergolas
 
