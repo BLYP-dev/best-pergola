@@ -1,0 +1,262 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '@layouts/PageLayout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import { services } from '@data/services';
+import { costPages } from '@data/costs';
+import { guidePages } from '@data/guides';
+import { counties } from '@data/counties';
+import { towns } from '@data/towns';
+import { SITE } from '@lib/site';
+
+const posts = (await getCollection('blog'))
+  .filter((post) => !post.data.noindex)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const topLevelPageModules = import.meta.glob('./*.astro');
+const excludedTopLevelPages = new Set(['index', 'sitemap', 'thank-you']);
+const standalonePages = Object.keys(topLevelPageModules)
+  .map((file) => file.replace(/^\.\//, '').replace(/\.astro$/, ''))
+  .filter((slug) => !excludedTopLevelPages.has(slug) && !slug.includes('['))
+  .map((slug) => ({
+    slug,
+    name: slug
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' '),
+  }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Sitemap', url: '/sitemap/' },
+];
+
+const priorityLinks = [
+  {
+    href: '/pergola-installation/',
+    title: 'Find Pergola Installers',
+    description: 'Compare installation options and request quotes from companies covering your area.',
+  },
+  {
+    href: '/pergola-cost/',
+    title: 'Pergola Costs',
+    description: 'Typical UK installed prices, cost variables and optional extras.',
+  },
+  {
+    href: '/locations/',
+    title: 'Pergola Installers by Location',
+    description: 'Browse the counties and towns currently covered by BestPergola.',
+  },
+];
+
+const townsByCounty = counties
+  .map((county) => ({
+    county,
+    towns: towns
+      .filter((town) => town.countySlug === county.slug)
+      .sort((a, b) => a.name.localeCompare(b.name)),
+  }))
+  .filter((group) => group.towns.length > 0);
+---
+
+<PageLayout
+  title={`HTML Sitemap | ${SITE.name}`}
+  description="Browse BestPergola installation, product, cost, planning, advice and UK location pages from one crawlable directory."
+  canonical="/sitemap/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container-tight py-10 md:py-14">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="max-w-4xl pt-4 pb-12 md:pb-16">
+      <div class="eyebrow mb-5">HTML sitemap</div>
+      <h1 class="display text-4xl md:text-6xl lg:text-7xl">Explore BestPergola.</h1>
+      <p class="mt-6 text-lg md:text-xl leading-relaxed max-w-3xl" style="color: var(--color-mist);">
+        A complete, automatically updated directory of pergola installation, product, cost,
+        planning, advice and location pages.
+      </p>
+    </header>
+
+    <section class="mb-16 md:mb-24">
+      <div class="grid md:grid-cols-3 gap-4">
+        {priorityLinks.map((link) => (
+          <a
+            href={link.href}
+            class="group surface-moss p-7 md:p-8 flex flex-col justify-between min-h-60 hover:-translate-y-0.5 transition-transform"
+          >
+            <div>
+              <div class="eyebrow mb-4" style="color: rgba(241,233,216,.58);">Start here</div>
+              <h2 class="font-display text-2xl md:text-3xl" style="color: var(--color-cream);">
+                {link.title}
+              </h2>
+              <p class="mt-4 text-sm leading-relaxed" style="color: rgba(241,233,216,.7);">
+                {link.description}
+              </p>
+            </div>
+            <span class="mt-8 text-xl self-end opacity-50 group-hover:opacity-100 transition-opacity" aria-hidden="true">↗</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="py-12 md:py-16 border-y">
+      <div class="grid lg:grid-cols-[.6fr_1.4fr] gap-8 lg:gap-16">
+        <div>
+          <div class="eyebrow mb-3">Products and installation</div>
+          <h2 class="display text-3xl md:text-4xl">Pergola types</h2>
+        </div>
+        <ul class="grid sm:grid-cols-2 gap-3">
+          {services.map((service) => (
+            <li>
+              <a href={`/${service.slug}/`} class="group surface px-5 py-4 flex items-center justify-between gap-4">
+                <span class="font-medium">{service.name}</span>
+                <span class="opacity-30 group-hover:opacity-100 transition-opacity" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 md:py-16 border-b">
+      <div class="grid lg:grid-cols-[.6fr_1.4fr] gap-8 lg:gap-16">
+        <div>
+          <div class="eyebrow mb-3">Budgets and specifications</div>
+          <h2 class="display text-3xl md:text-4xl">Cost guides</h2>
+        </div>
+        <ul class="grid sm:grid-cols-2 gap-3">
+          {costPages.map((page) => (
+            <li>
+              <a href={`/${page.slug}/`} class="group surface-stone px-5 py-4 flex items-center justify-between gap-4">
+                <span class="font-medium">{page.name}</span>
+                <span class="opacity-30 group-hover:opacity-100 transition-opacity" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    {standalonePages.length > 0 && (
+      <section class="py-12 md:py-16 border-b">
+        <div class="grid lg:grid-cols-[.6fr_1.4fr] gap-8 lg:gap-16">
+          <div>
+            <div class="eyebrow mb-3">More from BestPergola</div>
+            <h2 class="display text-3xl md:text-4xl">Specialist pages</h2>
+          </div>
+          <ul class="grid sm:grid-cols-2 gap-3">
+            {standalonePages.map((page) => (
+              <li>
+                <a href={`/${page.slug}/`} class="group surface px-5 py-4 flex items-center justify-between gap-4">
+                  <span class="font-medium">{page.name}</span>
+                  <span class="opacity-30 group-hover:opacity-100 transition-opacity" aria-hidden="true">→</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )}
+
+    <section class="py-12 md:py-16 border-b">
+      <div class="grid lg:grid-cols-[.6fr_1.4fr] gap-8 lg:gap-16">
+        <div>
+          <div class="eyebrow mb-3">Before you build</div>
+          <h2 class="display text-3xl md:text-4xl">Planning and comparisons</h2>
+        </div>
+        <ul class="grid sm:grid-cols-2 gap-x-8 gap-y-4">
+          {guidePages.map((guide) => (
+            <li>
+              <a href={`/${guide.slug}/`} class="inline-flex items-start gap-2 underline decoration-[color:var(--color-clay)] underline-offset-4">
+                <span>{guide.name}</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 md:py-16 border-b">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-9">
+        <div>
+          <div class="eyebrow mb-3">Latest research and advice</div>
+          <h2 class="display text-3xl md:text-4xl">Blog and guides</h2>
+        </div>
+        <a href="/blog/" class="btn btn-secondary">Visit the blog</a>
+      </div>
+      <ul class="grid md:grid-cols-2 gap-x-10">
+        {posts.map((post) => (
+          <li class="border-t py-5">
+            <a href={`/blog/${post.slug}/`} class="group flex items-start justify-between gap-5">
+              <div>
+                <span class="font-medium leading-snug">{post.data.title}</span>
+                <span class="block mt-1 text-xs" style="color: var(--color-mist);">
+                  {post.data.category}
+                </span>
+              </div>
+              <span class="opacity-30 group-hover:opacity-100 transition-opacity" aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="py-12 md:py-16 border-b">
+      <div class="mb-9 max-w-3xl">
+        <div class="eyebrow mb-3">UK coverage</div>
+        <h2 class="display text-3xl md:text-4xl">Pergola installers by county</h2>
+        <p class="mt-4 leading-relaxed" style="color: var(--color-mist);">
+          County pages are added here automatically from the location data used to build the site.
+        </p>
+      </div>
+      <ul class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+        {counties.map((county) => (
+          <li>
+            <a
+              href={`/locations/${county.slug}/pergola-installers/`}
+              class="surface px-5 py-4 flex items-center justify-between gap-4"
+            >
+              <span class="font-medium">{county.name}</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="py-12 md:py-16">
+      <div class="mb-9 max-w-3xl">
+        <div class="eyebrow mb-3">Local pages</div>
+        <h2 class="display text-3xl md:text-4xl">Pergola installers by town</h2>
+        <p class="mt-4 leading-relaxed" style="color: var(--color-mist);">
+          Towns are grouped beneath their county and update whenever the location data changes.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        {townsByCounty.map(({ county, towns: countyTowns }) => (
+          <details class="surface p-6 md:p-7">
+            <summary class="cursor-pointer list-none flex items-center justify-between gap-4">
+              <span class="font-display text-xl md:text-2xl">{county.name}</span>
+              <span class="chip">{countyTowns.length} towns</span>
+            </summary>
+            <ul class="mt-6 pt-5 border-t grid sm:grid-cols-2 gap-x-5 gap-y-3">
+              {countyTowns.map((town) => (
+                <li>
+                  <a
+                    href={`/locations/${town.countySlug}/${town.slug}/pergola-installers/`}
+                    class="text-sm underline decoration-[color:var(--color-clay)] underline-offset-4"
+                  >
+                    {town.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        ))}
+      </div>
+    </section>
+  </div>
+</PageLayout>
